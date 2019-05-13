@@ -35,16 +35,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static boolean existeUsuario=false;
     CarouselView carouselView;
 
-    int[] sampleImages = {R.drawable.poster14, R.drawable.poster15, R.drawable.poster16, R.drawable.poster17, R.drawable.poster18};
+    int[] sampleImages = {R.drawable.poster1, R.drawable.poster2, R.drawable.poster3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //carouselView = (CarouselView) findViewById(R.id.carouselView);
-        //carouselView.setPageCount(sampleImages.length);
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
 
-       /* carouselView.setImageListener(new ImageListener() {
+       carouselView.setImageListener(new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(sampleImages[position]);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(int position) {
 
             }
-        });*/
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
