@@ -90,11 +90,22 @@
         android:id="@+id/editarBotoonChangePassword"
         android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="#D65463"
+        android:background="#D69463"
         android:text="Cambiar Contraseña"
-        android:textColor="#FFFDFD" />
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/editarBotoonUpdateGeneros"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="-50dp"
+        android:background="#D69463"
+        android:text="Actualizar generos Favoritos"
+        android:textColor="#000000"
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarPassword1"
@@ -134,10 +145,10 @@
 
     <TextView
         android:id="@+id/editarMessage2"
-        android:layout_width="fill_parent"
+        android:layout_width="264dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="-50dp"
         android:gravity="center"
         android:textColor="#AA0B10"
         android:textSize="20dip"

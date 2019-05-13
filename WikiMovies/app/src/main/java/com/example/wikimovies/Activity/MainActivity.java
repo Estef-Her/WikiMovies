@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
@@ -23,17 +24,38 @@ import android.os.Bundle;
 import android.content.Intent;
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Persona;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
+import com.synnapps.carouselview.ImageListener;
 import com.example.wikimovies.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final Modelo DATOS= new Modelo();
     public static  Persona USUARIO;
     public static boolean existeUsuario=false;
+    CarouselView carouselView;
+
+    int[] sampleImages = {R.drawable.poster14, R.drawable.poster15, R.drawable.poster16, R.drawable.poster17, R.drawable.poster18};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //carouselView = (CarouselView) findViewById(R.id.carouselView);
+        //carouselView.setPageCount(sampleImages.length);
+
+       /* carouselView.setImageListener(new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(sampleImages[position]);
+            }
+        });
+        carouselView.setImageClickListener(new ImageClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+        });*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
