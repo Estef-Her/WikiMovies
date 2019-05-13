@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import static com.example.wikimovies.Activity.MainActivity.DATOS;
 import static com.example.wikimovies.Activity.MainActivity.USUARIO;
+import static com.example.wikimovies.Activity.MainActivity.existeUsuario;
 
 public class addGeneros extends AppCompatActivity {
     List<String> seleccionados= new ArrayList<>();
@@ -31,8 +32,78 @@ public class addGeneros extends AppCompatActivity {
             public void onClick(View v) {
                 listo();}
         });
+        if(existeUsuario){
+            seleccionados=USUARIO.getGeneros();
+            preperarCheck();
+
+        }
     }
 
+    public void preperarCheck(){
+       for(String s : seleccionados){
+           switch (s){
+               case "Accion":
+                   ((CheckBox)findViewById(R.id.generoAccion)).setChecked(true);
+                   break;
+               case "Animacion":
+                   ((CheckBox)findViewById(R.id.generoAnimacion)).setChecked(true);
+                   break;
+               case "Aventura":
+                   ((CheckBox)findViewById(R.id.generoAventura)).setChecked(true);
+                   break;
+               case "Belica":
+                   ((CheckBox)findViewById(R.id.generoBelica)).setChecked(true);
+                   break;
+               case "Comedia":
+                   ((CheckBox)findViewById(R.id.generoComedia)).setChecked(true);
+                   break;
+               case "Ciencia Ficcion":
+                   ((CheckBox)findViewById(R.id.generoCienciaFiccion)).setChecked(true);
+                   break;
+               case "Crimen":
+                   ((CheckBox)findViewById(R.id.generoCrimen)).setChecked(true);
+                   break;
+               case "Documental":
+                   ((CheckBox)findViewById(R.id.generoDocumental)).setChecked(true);
+                   break;
+               case "Drama":
+                   ((CheckBox)findViewById(R.id.generoDrama)).setChecked(true);
+                   break;
+               case "Familia":
+                   ((CheckBox)findViewById(R.id.generoFamilia)).setChecked(true);
+                   break;
+               case "Fantasia":
+                   ((CheckBox)findViewById(R.id.generoFantasía)).setChecked(true);
+                   break;
+               case "Historia":
+                   ((CheckBox)findViewById(R.id.generoHistoria)).setChecked(true);
+                   break;
+               case "Misterio":
+                   ((CheckBox)findViewById(R.id.generoMisterio)).setChecked(true);
+                   break;
+               case "Musica":
+                   ((CheckBox)findViewById(R.id.generoMusica)).setChecked(true);
+                   break;
+               case "Pelicula De TV":
+                   ((CheckBox)findViewById(R.id.generoPeliculaDeTv)).setChecked(true);
+                   break;
+               case "Romance":
+                   ((CheckBox)findViewById(R.id.generoRomance)).setChecked(true);
+                   break;
+               case "Suspense":
+                   ((CheckBox)findViewById(R.id.generoSuspense)).setChecked(true);
+                   break;
+               case "Terror":
+                   ((CheckBox)findViewById(R.id.generoTerror)).setChecked(true);
+                   break;
+               case "Western":
+                   ((CheckBox)findViewById(R.id.generoWestern)).setChecked(true);
+                   break;
+               default:
+                    break;
+           }
+       }
+    }
     public void listo(){
         for (String s: seleccionados) {
             DATOS.addGenerosQuemados(USUARIO.getEmail(),s);

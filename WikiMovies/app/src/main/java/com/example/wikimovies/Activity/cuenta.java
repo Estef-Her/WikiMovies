@@ -54,6 +54,7 @@ public class cuenta extends AppCompatActivity {
         final FloatingActionButton botnEditar2 = (FloatingActionButton) findViewById(R.id.editarBootonSave1);
         Button botnEditar3 = (Button) findViewById(R.id.editarBotoonChangePassword);
         final FloatingActionButton botnEditar4 = (FloatingActionButton) findViewById(R.id.editarBootonSave2);
+        Button botnEditar5=(Button)findViewById(R.id.editarBotoonUpdateGeneros);
 
 
         botnEditar1.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +94,14 @@ public class cuenta extends AppCompatActivity {
         actualizarDatos();
     }
     });
+
+        botnEditar5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(cuenta.this, addGeneros.class);
+                startActivity(a);
+            }
+        });
 }
 
     public void actualizarDatos(){
