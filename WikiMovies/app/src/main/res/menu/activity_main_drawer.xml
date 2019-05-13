@@ -11,8 +11,7 @@
         <item
             android:id="@+id/nav_cuenta"
             android:icon="@drawable/usuario"
-            android:title="@string/menu_cuenta"
-            android:visible="false"/>
+            android:title="@string/menu_cuenta"/>
         <item
             android:id="@+id/nav_personalizar"
             android:icon="@drawable/ajustes"
@@ -20,8 +19,7 @@
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
-            android:title="@string/menu_logout"
-            android:visible="false"/>
+            android:title="@string/menu_logout"/>
     </group>
 
     <item android:title="@string/Comunicacion">

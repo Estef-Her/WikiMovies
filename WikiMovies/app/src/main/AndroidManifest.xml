@@ -16,6 +16,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".Activity.cuenta"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Activity.addGeneros"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

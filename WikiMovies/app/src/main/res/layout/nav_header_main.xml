@@ -19,8 +19,7 @@
         android:layout_height="99dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:tint="#FFFEFE"
-        app:srcCompat="@drawable/usuario2" />
+        app:srcCompat="@drawable/user2" />
 
     <TextView
         android:layout_width="match_parent"
