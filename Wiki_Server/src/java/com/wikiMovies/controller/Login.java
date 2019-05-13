@@ -5,6 +5,9 @@
  */
 package com.wikiMovies.controller;
 
+import com.google.gson.Gson;
+import com.wikiMovies.domain.Usuario;
+import com.wikiMovies.services.Servicio_Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Login", urlPatterns = {"/doLogin", "/doLogout"})
 public class Login extends HttpServlet {
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,17 +46,8 @@ public class Login extends HttpServlet {
             case "/doLogout":
                 this.doLogout(request,response);
                 break;
-            default:
-               try{
-                request.getRequestDispatcher("Home.jsp").
-                        forward( request, response);
-                }
-               catch(Exception e){ 
-                    String error = e.getMessage();
-                    request.setAttribute("error",e);
-                    request.getRequestDispatcher("Error.jsp").forward(request, response);
-
-                }
+            default:           
+                request.getRequestDispatcher("index.html");             
                 break;
         }
   }
@@ -114,12 +107,44 @@ public class Login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void doLogin(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+            String data;
+            Usuario u = new Usuario();
+            u.setEmail((String) request.getParameter("email"));
+            u.setPassword((String) request.getParameter("key"));            
+            Gson g = new Gson(); 
+            PrintWriter out = response.getWriter();
+            data = g.toJson(Servicio_Usuario.instance().doLogin(u));
+            if(data != null){
+            response.setStatus(200);
+            }else{
+            response.sendError(2);
+            }
+            try {
+            out.println(data);
+        } finally {
+            out.close();
+        }
+        }
+        catch(Exception e){
+            response.setStatus(400); // faild    
+            request.getRequestDispatcher("index.html").
+                forward( request, response);
+        }
     }
 
-    private void doLogout(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     protected void doLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       try{
+        request.getSession().invalidate();       
+        request.getRequestDispatcher("index.html").
+                forward( request, response);
+       }
+       catch(Exception e){           
+            response.setStatus(400); // faild    
+            request.getRequestDispatcher("index.html").
+                forward( request, response);
+        }
     }
 
 }

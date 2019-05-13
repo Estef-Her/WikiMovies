@@ -17,4 +17,5 @@ public interface Services_Interface <T,Integer>{
     public abstract void delete(T o);
     public abstract T findById(Integer o);
     public abstract List<T> findAll();
+   
 }

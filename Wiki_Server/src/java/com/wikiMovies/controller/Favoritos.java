@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "Usuario", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID"})
+@WebServlet(name = "Favoritos", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID"})
 public class Favoritos extends HttpServlet {
 
     /**

@@ -17,6 +17,9 @@ import org.hibernate.HibernateException;
  */
 public class Usuario_Dao extends HibernateUtil implements IBaseDAO<Usuario,Integer>{
 
+    public Usuario_Dao() {
+    }
+
     @Override
     public void add(Usuario o) {
          try{
@@ -101,6 +104,24 @@ public class Usuario_Dao extends HibernateUtil implements IBaseDAO<Usuario,Integ
         }
     return users;
     }
-
+ public Usuario findByData(String user, String passw) {
+        Usuario log = new Usuario();
+        List<Usuario> l= new ArrayList();
+         String sql = "select * from Usuario where email = "+ "'"+ user +"'"+" and "+"password = " + "'" + passw + "';";
+         try{
+            operationStart();
+            log = (Usuario) getSesion().createSQLQuery(sql);
+            //log = l.get(0);
+            getTransac().commit();
+        }
+        catch(HibernateException he){
+            handleException(he);
+            throw he;
+        }
+        finally{
+        getSesion().close();
+        }
+         return log;
+    }
   
 }

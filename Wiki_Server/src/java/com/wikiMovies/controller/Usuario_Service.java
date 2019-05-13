@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "Usuario", urlPatterns = {"/createUser", "/updateUser","/findAllUser","/finUserByID"})
-public class Usuario extends HttpServlet {
+@WebServlet(name = "Usuario_Service", urlPatterns = {"/createUser", "/updateUser","/findAllUser","/finUserByID"})
+public class Usuario_Service extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,11 +77,11 @@ public class Usuario extends HttpServlet {
        try {
            processRequest(request, response);
        } catch (SQLException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        } catch (InstantiationException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 
@@ -99,11 +99,11 @@ public class Usuario extends HttpServlet {
        try {
            processRequest(request, response);
        } catch (SQLException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        } catch (InstantiationException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
-           Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 

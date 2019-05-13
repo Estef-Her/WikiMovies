@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "Usuario", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID"})
+@WebServlet(name = "WikiGenero", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID"})
 public class WikiGenero extends HttpServlet {
 
     /**

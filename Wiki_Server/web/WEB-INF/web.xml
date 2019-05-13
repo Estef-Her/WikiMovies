@@ -5,8 +5,8 @@
         <servlet-class>com.wikiMovies.controller.Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Usuario</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Usuario</servlet-class>
+        <servlet-name>Usuario_Service</servlet-name>
+        <servlet-class>com.wikiMovies.controller.Usuario_Service</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Pelicula</servlet-name>
@@ -29,19 +29,19 @@
         <url-pattern>/doLogout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario</servlet-name>
+        <servlet-name>Usuario_Service</servlet-name>
         <url-pattern>/createUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario</servlet-name>
+        <servlet-name>Usuario_Service</servlet-name>
         <url-pattern>/updateUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario</servlet-name>
+        <servlet-name>Usuario_Service</servlet-name>
         <url-pattern>/findAllUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario</servlet-name>
+        <servlet-name>Usuario_Service</servlet-name>
         <url-pattern>/finUserByID</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
