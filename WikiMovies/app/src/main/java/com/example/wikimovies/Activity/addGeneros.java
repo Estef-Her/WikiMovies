@@ -200,7 +200,7 @@ public class addGeneros extends AppCompatActivity {
 
 
         }
-        if(seleccionados.toString()=="[]"){
+        if(seleccionados.toString().equals("[]")){
             seleccionadosLabel.setText("");
         }else{
         seleccionadosLabel.setText(seleccionados.toString());}

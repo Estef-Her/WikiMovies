@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.cuenta">
+
+    <ImageView
+        android:id="@+id/photoPerfil"
+        android:layout_width="145dp"
+        android:layout_height="158dp"
+        android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:srcCompat="@drawable/user2" />
+
+    <EditText
+        android:id="@+id/editarNombre"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="-140dp"
+        android:enabled="false"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:textColor="#FD030303" />
+
+    <EditText
+        android:id="@+id/editarApellidos"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:enabled="false"
+        android:hint="Apellidos"
+        android:inputType="text"
+        android:textColor="#FD030303"/>
+
+    <EditText
+        android:id="@+id/editarEdad"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:enabled="false"
+        android:hint="Edad"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:textColor="#FD030303"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/editarBootonEditar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="290dp"
+        android:background="#54A2D6"
+        app:backgroundTint="#54A2D6"
+        app:srcCompat="@drawable/editar"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/editarBootonSave1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="-58dp"
+        android:background="#11963E"
+        app:backgroundTint="#11963E"
+        app:srcCompat="@drawable/save"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/editarMessage1"
+        android:layout_width="188dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="-50dp"
+        android:text="Cambios Guardados!"
+        android:textColor="#1CC216"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/editarEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:enabled="false"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#FD030303" />
+
+    <Button
+        android:id="@+id/editarBotoonChangePassword"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#D65463"
+        android:text="Cambiar Contraseña"
+        android:textColor="#FFFDFD" />
+
+    <EditText
+        android:id="@+id/editarPassword1"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:enabled="false"
+        android:hint="Contraseña Actual"
+        android:inputType="textPassword"
+        android:textColor="#FD030303"
+        android:textColorHint="#969595"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/editarPassword2"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="-45dp"
+        android:enabled="false"
+        android:hint="Nueva Contraseña"
+        android:inputType="textPassword"
+        android:textColor="#FD030303"
+        android:textColorHint="#969595"
+        android:visibility="visible" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/editarBootonSave2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="10dp"
+        android:background="#0A9439"
+        android:visibility="invisible"
+        app:backgroundTint="#11963E"
+        app:srcCompat="@drawable/save" />
+
+    <TextView
+        android:id="@+id/editarMessage2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#AA0B10"
+        android:textSize="20dip"
+        android:visibility="visible" />
+
+
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.example.wikimovies.Activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.MenuInflater;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -135,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // startActivity(a);
     }
     void verCuenta(){
-        // Intent a = new Intent(this, Cuenta.class);
-        // startActivity(a);
+        Intent a = new Intent(this, cuenta.class);
+        startActivity(a);
     }
     void logout(){
           finish();

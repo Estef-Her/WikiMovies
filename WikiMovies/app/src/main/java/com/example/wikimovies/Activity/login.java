@@ -51,12 +51,12 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                loginn();
             }
         });
     }
 
-    public void login(){
+    public void loginn(){
         String email= inputEmail.getText().toString();
         String password=inputPassword.getText().toString();
         Persona p=DATOS.loginQuemado(email,password);

@@ -41,7 +41,7 @@ public class Modelo {
     public boolean addGenerosQuemados(String email,String descripcion){
         boolean resultado =true;
         for (Persona p: personas){
-            if(p.getEmail()==email){
+            if(p.getEmail().equals(email)){
                 p.getGeneros().add(descripcion);
                 resultado=true;
             }else {
@@ -63,6 +63,30 @@ public class Modelo {
         return logueado;
     }
 
+    public Persona actualizarDatos(String email, String nombre, String apellidos, int edad){
+        Persona per= null;
+        for(Persona p : personas){
+            if(p.getEmail().equals(email)){
+                p.setNombre(nombre);
+                p.setApellidos(apellidos);
+                p.setEdad(edad);
+                per=p;
+            }
+        }
+        return per;
+    }
+    public Persona cambiarCont(String email, String contA, String conN){
+        Persona per= null;
+        for(Persona p : personas){
+            if(p.getEmail().equals(email)){
+                if(p.getPassword().equals(contA)){
+                    p.setPassword(conN);
+                    per=p;
+                }
+            }
+        }
+        return per;
+    }
     public Persona getLogueado() {
         return logueado;
     }
