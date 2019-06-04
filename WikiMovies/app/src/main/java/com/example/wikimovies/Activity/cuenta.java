@@ -1,20 +1,12 @@
 package com.example.wikimovies.Activity;
 
-import android.graphics.Color;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
-import android.content.Context;
 
 import static com.example.wikimovies.Activity.MainActivity.DATOS;
 import static com.example.wikimovies.Activity.MainActivity.USUARIO;
@@ -22,7 +14,7 @@ import static com.example.wikimovies.Activity.MainActivity.existeUsuario;
 
 import android.content.Intent;
 
-import com.example.wikimovies.Datos.Persona;
+import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
 
 public class cuenta extends AppCompatActivity {
@@ -105,7 +97,7 @@ public class cuenta extends AppCompatActivity {
 }
 
     public void actualizarDatos(){
-        Persona persona= DATOS.actualizarDatos(email.getText().toString(),nombre.getText().toString(),apellidos.getText().toString(),Integer.parseInt(edad.getText().toString()));
+        Usuario persona= DATOS.actualizarDatos(email.getText().toString(),nombre.getText().toString(),apellidos.getText().toString(),Integer.parseInt(edad.getText().toString()));
         if(persona!=null){
             USUARIO=persona;
             ((TextView)findViewById(R.id.editarMessage1)).setVisibility(View.VISIBLE);
@@ -117,7 +109,7 @@ public class cuenta extends AppCompatActivity {
     }
 
     public void cambiarContraseña(){
-        Persona persona= DATOS.cambiarCont(email.getText().toString(),contraseñaActual.getText().toString(),contraseñaNueva.getText().toString());
+        Usuario persona= DATOS.cambiarCont(email.getText().toString(),contraseñaActual.getText().toString(),contraseñaNueva.getText().toString());
         if(persona!=null){
             USUARIO=persona;
             ((TextView)findViewById(R.id.editarMessage2)).setVisibility(View.VISIBLE);

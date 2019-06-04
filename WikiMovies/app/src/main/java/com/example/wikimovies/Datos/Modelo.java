@@ -4,56 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Modelo {
-    List<Persona> personas = new ArrayList<>();
-    Persona logueado = new Persona();
+    List<Usuario> Usuarios = new ArrayList<>();
+    Usuario logueado = new Usuario();
 
     public Modelo(){
         insertarDatosQuemados();
     }
 
-    public List<Persona> getPersonas() {
-        return personas;
+    public List<Usuario> getUsuarios() {
+        return Usuarios;
     }
 
-    public void setPersonas(List<Persona> personas) {
-        this.personas = personas;
+    public void setUsuarios(List<Usuario> Usuarios) {
+        this.Usuarios = Usuarios;
     }
 
     public void insertarDatosQuemados(){
-        personas=new ArrayList<>();
-        logueado=new Persona();
-        Persona persona1= new Persona("Estefany","Hernández Arce","1","dh17376334@gmail.com",21,2);
-        persona1.getGeneros().add("Terror");
-        persona1.getGeneros().add("Comedia");
-        persona1.getGeneros().add("Drama");
-        persona1.getGeneros().add("Romance");
-        this.personas.add(persona1);
-        Persona persona2= new Persona("Roger","Amador","12345678","rogeramador@gmail.com",21,1);
-        persona2.getGeneros().add("Terror");
-        persona2.getGeneros().add("Comedia");
-        persona2.getGeneros().add("Acción");
-        this.personas.add(persona2);
+        Usuarios=new ArrayList<>();
+        logueado=new Usuario();
+        Usuario Usuario1= new Usuario("Estefany","Hernández Arce","1","dh17376334@gmail.com",21,"F","user");
+        Usuario1.getGenerosPelis().add(new PeliGeneros("dh17376334@gmail.com","comedia"));
+        Usuario1.getGenerosPelis().add(new PeliGeneros("dh17376334@gmail.com","romance"));
+        Usuario1.getGenerosPelis().add(new PeliGeneros("dh17376334@gmail.com","terror"));
+        Usuario1.getGenerosPelis().add(new PeliGeneros("dh17376334@gmail.com","suspenso"));
+        this.Usuarios.add(Usuario1);
+        Usuario Usuario2= new Usuario("Roger","Amador","12345678","rogeramador@gmail.com",21,"M","admin");
+        Usuario2.getGenerosPelis().add(new PeliGeneros("rogeramador@gmail.com","accion"));
+        Usuario2.getGenerosPelis().add(new PeliGeneros("rogeramador@gmail.com","comedia"));
+        Usuario2.getGenerosPelis().add(new PeliGeneros("rogeramador@gmail.com","romance"));
+        this.Usuarios.add(Usuario2);
     }
-    public void agregarPersonaQuemado(Persona persona1){
-        this.personas.add(persona1);
+    public void agregarUsuarioQuemado(Usuario Usuario1){
+        this.Usuarios.add(Usuario1);
     }
 
     public boolean addGenerosQuemados(String email,String descripcion){
         boolean resultado =true;
-        for (Persona p: personas){
+        for (Usuario p: Usuarios){
             if(p.getEmail().equals(email)){
-                p.getGeneros().add(descripcion);
+                p.getGenerosPelis().add(new PeliGeneros(email,descripcion));
                 resultado=true;
             }else {
                 resultado= false;
             }
         }
-          return  resultado;
+        return  resultado;
     }
 
-    public Persona loginQuemado(String email , String password){
-        Persona logueado= null;
-        for (Persona p: personas){
+    public Usuario loginQuemado(String email , String password){
+        Usuario logueado= null;
+        for (Usuario p: Usuarios){
             if(p.getEmail().equals(email)){
                 if(p.getPassword().equals(password)){
                     logueado=p;
@@ -63,9 +63,9 @@ public class Modelo {
         return logueado;
     }
 
-    public Persona actualizarDatos(String email, String nombre, String apellidos, int edad){
-        Persona per= null;
-        for(Persona p : personas){
+    public Usuario actualizarDatos(String email, String nombre, String apellidos, int edad){
+        Usuario per= null;
+        for(Usuario p : Usuarios){
             if(p.getEmail().equals(email)){
                 p.setNombre(nombre);
                 p.setApellidos(apellidos);
@@ -75,9 +75,9 @@ public class Modelo {
         }
         return per;
     }
-    public Persona cambiarCont(String email, String contA, String conN){
-        Persona per= null;
-        for(Persona p : personas){
+    public Usuario cambiarCont(String email, String contA, String conN){
+        Usuario per= null;
+        for(Usuario p : Usuarios){
             if(p.getEmail().equals(email)){
                 if(p.getPassword().equals(contA)){
                     p.setPassword(conN);
@@ -87,12 +87,11 @@ public class Modelo {
         }
         return per;
     }
-    public Persona getLogueado() {
+    public Usuario getLogueado() {
         return logueado;
     }
 
-    public void setLogueado(Persona logueado) {
+    public void setLogueado(Usuario logueado) {
         this.logueado = logueado;
     }
 }
-

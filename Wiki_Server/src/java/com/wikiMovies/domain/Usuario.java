@@ -1,15 +1,11 @@
 package com.wikiMovies.domain;
-// Generated May 12, 2019 4:54:58 PM by Hibernate Tools 4.3.1
+// Generated Jun 2, 2019 12:33:37 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +24,7 @@ public class Usuario  implements java.io.Serializable {
      private BigDecimal edad;
      private String sexo;
      private String password;
-     private Set<WikiGeneros> wikiGeneroses = new HashSet<WikiGeneros>(0);
+     private String rol;
 
     public Usuario() {
     }
@@ -37,14 +33,14 @@ public class Usuario  implements java.io.Serializable {
     public Usuario(String email) {
         this.email = email;
     }
-    public Usuario(String email, String nombre, String apellidos, BigDecimal edad, String sexo, String password, Set<WikiGeneros> wikiGeneroses) {
+    public Usuario(String email, String nombre, String apellidos, BigDecimal edad, String sexo, String password, String rol) {
        this.email = email;
        this.nombre = nombre;
        this.apellidos = apellidos;
        this.edad = edad;
        this.sexo = sexo;
        this.password = password;
-       this.wikiGeneroses = wikiGeneroses;
+       this.rol = rol;
     }
    
      @Id 
@@ -109,13 +105,14 @@ public class Usuario  implements java.io.Serializable {
         this.password = password;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
-    public Set<WikiGeneros> getWikiGeneroses() {
-        return this.wikiGeneroses;
+    
+    @Column(name="ROL", length=40)
+    public String getRol() {
+        return this.rol;
     }
     
-    public void setWikiGeneroses(Set<WikiGeneros> wikiGeneroses) {
-        this.wikiGeneroses = wikiGeneroses;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
 

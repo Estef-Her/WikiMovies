@@ -8,7 +8,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#0FFFFFFF"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -16,10 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#54A2D6"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="WikiMovies"
+            app:titleMarginStart="150dp" />
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carouselView"
+            android:layout_width="match_parent"
+            android:layout_height="243dp"
+            app:fillColor="#E03B31"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="432dp">
+
+            <include layout="@layout/content_main" />
+        </ScrollView>
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+
 
 </android.support.design.widget.CoordinatorLayout>

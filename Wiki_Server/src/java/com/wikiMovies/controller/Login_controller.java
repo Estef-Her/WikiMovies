@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Addiel
  */
 @WebServlet(name = "Login", urlPatterns = {"/doLogin", "/doLogout"})
-public class Login extends HttpServlet {
+public class Login_controller extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,11 +67,11 @@ public class Login extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,11 +89,11 @@ public class Login extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login_controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -117,6 +117,8 @@ public class Login extends HttpServlet {
             PrintWriter out = response.getWriter();
             data = g.toJson(Servicio_Usuario.instance().doLogin(u));
             if(data != null){
+            String user = g.toJson(u);
+            out.write(user);
             response.setStatus(200);
             }else{
             response.sendError(2);
@@ -129,8 +131,7 @@ public class Login extends HttpServlet {
         }
         catch(Exception e){
             response.setStatus(400); // faild    
-            request.getRequestDispatcher("index.html").
-                forward( request, response);
+           
         }
     }
 

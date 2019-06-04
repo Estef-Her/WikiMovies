@@ -5,8 +5,9 @@
  */
 package com.wikiMovies.controller;
 
+import com.wikiMovies.domain.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Addiel
  */
 @WebServlet(name = "Usuario_Service", urlPatterns = {"/createUser", "/updateUser","/findAllUser","/finUserByID"})
-public class Usuario_Service extends HttpServlet {
+public class Usuario_controller extends HttpServlet {
+
+   
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,11 +80,11 @@ public class Usuario_Service extends HttpServlet {
        try {
            processRequest(request, response);
        } catch (SQLException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (InstantiationException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 
@@ -99,11 +102,11 @@ public class Usuario_Service extends HttpServlet {
        try {
            processRequest(request, response);
        } catch (SQLException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (InstantiationException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
-           Logger.getLogger(Usuario_Service.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 
@@ -118,11 +121,25 @@ public class Usuario_Service extends HttpServlet {
     }// </editor-fold>
 
     private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nombre = (String)request.getParameter("nombre");
+        String apellidos = (String)request.getParameter("apellidos");
+        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
+        String sexo = (String)request.getParameter("sexo");
+        String password = (String)request.getParameter("key");
+        String email = (String)request.getParameter("email");
+        String rol = (String)request.getParameter("rol");
+        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nombre = (String)request.getParameter("nombre");
+        String apellidos = (String)request.getParameter("apellidos");
+        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
+        String sexo = (String)request.getParameter("sexo");
+        String password = (String)request.getParameter("key");
+        String email = (String)request.getParameter("email");
+        String rol = (String)request.getParameter("rol");
+        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
     }
 
     private void getAll(HttpServletRequest request, HttpServletResponse response) {
@@ -130,7 +147,7 @@ public class Usuario_Service extends HttpServlet {
     }
 
     private void getByID(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String email = (String)request.getParameter("email");
     }
 
 }

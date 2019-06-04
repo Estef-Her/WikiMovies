@@ -19,8 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "Favoritos", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID"})
-public class Favoritos extends HttpServlet {
+@WebServlet(name = "Pelicula", urlPatterns = {"/createPeli", "/updatePeli","/findAllPelis","/finPeliByID"})
+public class Pelicula_controller extends HttpServlet {
+
+    public Pelicula_controller(String nombre, String font1, String font2, String font3, String descripcion, String genero, String resumen, String trailer) {
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +34,19 @@ public class Favoritos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
         switch(request.getServletPath()){
-            case "/createFavorito":
+            case "/createPeli":
                 this.doCreate(request,response);
                 break;
-            case "/updateFavorito":
+            case "/updatePeli":
                 this.doUpdate(request,response);
                 break;
-            case "/findAllFav":
+            case "/findAllPelis":
                 this.getAll(request,response);
-                break;    
-            case "/findFavID":
+                break;
+            case "/finPeliByID":
                 this.getByID(request,response);
                 break;    
             default:
@@ -73,15 +76,15 @@ public class Favoritos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      try {
-          processRequest(request, response);
-      } catch (SQLException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (InstantiationException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (IllegalAccessException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      }
+       try {
+           processRequest(request, response);
+       } catch (SQLException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (InstantiationException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (IllegalAccessException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
@@ -95,15 +98,15 @@ public class Favoritos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      try {
-          processRequest(request, response);
-      } catch (SQLException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (InstantiationException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (IllegalAccessException ex) {
-          Logger.getLogger(Favoritos.class.getName()).log(Level.SEVERE, null, ex);
-      }
+       try {
+           processRequest(request, response);
+       } catch (SQLException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (InstantiationException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (IllegalAccessException ex) {
+           Logger.getLogger(Pelicula_controller.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
@@ -117,11 +120,27 @@ public class Favoritos extends HttpServlet {
     }// </editor-fold>
 
     private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nombre = (String)request.getParameter("nombre");
+        String font1 = (String)request.getParameter("font1");
+        String font2 = ((String)request.getParameter("font2"));
+        String font3 = (String)request.getParameter("font3");
+        String descripcion = (String)request.getParameter("descrip");
+        String genero = (String)request.getParameter("genero");
+        String resumen = (String)request.getParameter("resumen");
+        String trailer = (String)request.getParameter("trailer");
+        Pelicula_controller p = new Pelicula_controller(nombre,font1,font2,font3,descripcion,genero,resumen,trailer);
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nombre = (String)request.getParameter("nombre");
+        String font1 = (String)request.getParameter("font1");
+        String font2 = ((String)request.getParameter("font2"));
+        String font3 = (String)request.getParameter("font3");
+        String descripcion = (String)request.getParameter("descrip");
+        String genero = (String)request.getParameter("genero");
+        String resumen = (String)request.getParameter("resumen");
+        String trailer = (String)request.getParameter("trailer");
+        Pelicula_controller p = new Pelicula_controller(nombre,font1,font2,font3,descripcion,genero,resumen,trailer);
     }
 
     private void getAll(HttpServletRequest request, HttpServletResponse response) {
@@ -129,7 +148,7 @@ public class Favoritos extends HttpServlet {
     }
 
     private void getByID(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String nombre = (String)request.getParameter("nombre");
     }
 
 }

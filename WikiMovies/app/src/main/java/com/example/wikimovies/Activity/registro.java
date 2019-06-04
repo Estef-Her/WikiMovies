@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.wikimovies.Datos.Persona;
+import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
 
 import static com.example.wikimovies.Activity.MainActivity.DATOS;
@@ -22,7 +22,7 @@ public class registro extends AppCompatActivity {
     String email;
     String password;
     int edad;
-    int sexo;
+    String sexo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +33,14 @@ public class registro extends AppCompatActivity {
         radioMasculino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sexo=1;
+                sexo="M";
             }
         });
         RadioButton radioFemenino= findViewById(R.id.femenino);
         radioFemenino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sexo=2;
+                sexo="F";
             }
         });
         TextView lblGotoRegister = findViewById(R.id.link_to_login);
@@ -71,8 +71,8 @@ public class registro extends AppCompatActivity {
         if(nombre.equals("") || apellidos.equals("") || password.equals("") || email.equals("") || edad==0){
             ((TextView)findViewById(R.id.register_error)).setText("Datos invalidos o campos vacios!");
         }else{
-            Persona user= new Persona(nombre,apellidos,password,email,edad,sexo);
-            DATOS.agregarPersonaQuemado(user);
+            Usuario user= new Usuario(nombre,apellidos,password,email,edad,sexo,"");
+            DATOS.agregarUsuarioQuemado(user);
             USUARIO=user;
             Toast.makeText(this,"Persona Creada!",Toast.LENGTH_LONG).show();
             Intent a = new Intent(registro.this, addGeneros.class);

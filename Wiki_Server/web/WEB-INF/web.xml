@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Login</servlet-class>
+        <servlet-class>com.wikiMovies.controller.Login_controller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Usuario_Service</servlet-name>
@@ -10,15 +10,15 @@
     </servlet>
     <servlet>
         <servlet-name>Pelicula</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Pelicula</servlet-class>
+        <servlet-class>com.wikiMovies.controller.Pelicula_controller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WikiGenero</servlet-name>
-        <servlet-class>com.wikiMovies.controller.WikiGenero</servlet-class>
+        <servlet-class>com.wikiMovies.controller.WikiGenero_controller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Favoritos</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Favoritos</servlet-class>
+        <servlet-class>com.wikiMovies.controller.Favoritos_controller</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

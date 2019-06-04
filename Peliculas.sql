@@ -1,7 +1,7 @@
 DROP table Wiki_Generos;
 DROP table Usuario;
 DROP table Favoritos;
-DROP table Pelicula;
+
 
 Create table Usuario (
     nombre varchar(100),
@@ -10,6 +10,7 @@ Create table Usuario (
     sexo varchar(5),
     password varchar(10),
     email varchar(100) not null,
+    rol varchar(40),
     constraint pkUsuario primary key(email)
 );
 
@@ -19,17 +20,7 @@ Create table Wiki_Generos(
     constraint pkGenero primary key(usuario,descripcion),
     constraint fkGenero foreign key (usuario) references Usuario(email)
 );
-Create table Pelicula(
-    nombre varchar(80) not null,
-    genero varchar(50),
-    font1 varchar(50),
-    font2 varchar(50),
-    font3 varchar(50),
-    descripcion varchar(200),
-    resumen varchar(200),
-    trailer varchar(200),
-    constraint pkPelicula primary key(nombre) 
-);
+
 Create table Favoritos(
     usuario varchar(50) not null,
     pelicula varchar(80) not null,
@@ -52,12 +43,12 @@ END peli_det_seq;
 commit;
 
 
-CREATE OR REPLACE PROCEDURE crearPersona (xnombre in VARCHAR, xapellidos in VARCHAR, xpassword in VARCHAR, xemail in VARCHAR, xedad in number, xgenero in number)
+CREATE OR REPLACE PROCEDURE crearUsuario (xnombre in Usuario.nombre%TYPE, xapellidos in Usuario.apellidos%TYPE, xpassword in Usuario.password%TYPE, xemail in Usuario.email%TYPE, xedad in Usuario.edad%TYPE, xsexo in Usuario.sexo%TYPE)
     IS
     BEGIN
-        INSERT into Usuario (nombre,apellidos,password,email,edad,genero) VALUES(xnombre,xapellidos,xpassword,xemail,xedad,xgenero); 
+        INSERT into Usuario (nombre,apellidos,password,email,edad,sexo) VALUES(xnombre,xapellidos,xpassword,xemail,xedad,xsexo); 
         COMMIT;
-    END crearPersona;
+    END;
     /
 	
 CREATE OR REPLACE PROCEDURE crearGeneros(xpersona in VARCHAR, xdescripcion in VARCHAR)

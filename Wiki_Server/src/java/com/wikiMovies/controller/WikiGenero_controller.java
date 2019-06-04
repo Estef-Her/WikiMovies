@@ -5,7 +5,10 @@
  */
 package com.wikiMovies.controller;
 
+import com.wikiMovies.domain.WikiGeneros;
+import com.wikiMovies.domain.WikiGenerosId;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "Pelicula", urlPatterns = {"/createPeli", "/updatePeli","/findAllPelis","/finPeliByID"})
-public class Pelicula extends HttpServlet {
+@WebServlet(name = "WikiGenero", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID"})
+public class WikiGenero_controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,21 +34,21 @@ public class Pelicula extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
         switch(request.getServletPath()){
-            case "/createPeli":
+            case "/createWiki":
                 this.doCreate(request,response);
                 break;
-            case "/updatePeli":
+            case "/updateWiki":
                 this.doUpdate(request,response);
                 break;
-            case "/findAllPelis":
+            case "/findAllWiki":
                 this.getAll(request,response);
                 break;
-            case "/finPeliByID":
+            case "/finWikiByID":
                 this.getByID(request,response);
-                break;    
+                break;     
             default:
                try{
                 request.getRequestDispatcher("Home.jsp").
@@ -73,15 +76,15 @@ public class Pelicula extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (SQLException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (InstantiationException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (IllegalAccessException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       }
+    try {
+        processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -95,15 +98,15 @@ public class Pelicula extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (SQLException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (InstantiationException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (IllegalAccessException ex) {
-           Logger.getLogger(Pelicula.class.getName()).log(Level.SEVERE, null, ex);
-       }
+    try {
+        processRequest(request, response);
+    } catch (SQLException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -117,11 +120,18 @@ public class Pelicula extends HttpServlet {
     }// </editor-fold>
 
     private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String usuario = (String)request.getParameter("usuario");
+        String descripcion = (String)request.getParameter("descrip");        
+        WikiGenerosId wikiId = new WikiGenerosId(usuario,descripcion);
+        WikiGeneros wiki = new WikiGeneros();
+       
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String usuario = (String)request.getParameter("usuario");
+        String descripcion = (String)request.getParameter("descrip");
+        WikiGenerosId wikiId = new WikiGenerosId(usuario,descripcion);
+        WikiGeneros wiki = new WikiGeneros();
     }
 
     private void getAll(HttpServletRequest request, HttpServletResponse response) {
@@ -129,7 +139,7 @@ public class Pelicula extends HttpServlet {
     }
 
     private void getByID(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String usuario = (String)request.getParameter("usuario");
     }
 
 }

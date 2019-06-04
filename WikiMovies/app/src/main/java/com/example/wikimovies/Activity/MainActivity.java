@@ -1,12 +1,8 @@
 package com.example.wikimovies.Activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.MenuInflater;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -17,13 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Context;
-import android.os.Bundle;
 import android.content.Intent;
+
 import com.example.wikimovies.Datos.Modelo;
-import com.example.wikimovies.Datos.Persona;
+import com.example.wikimovies.Datos.Usuario;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
@@ -31,7 +25,7 @@ import com.example.wikimovies.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final Modelo DATOS= new Modelo();
-    public static  Persona USUARIO;
+    public static Usuario USUARIO;
     public static boolean existeUsuario=false;
     CarouselView carouselView;
 
@@ -41,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //carouselView = (CarouselView) findViewById(R.id.carouselView);
-        //carouselView.setPageCount(sampleImages.length);
+        carouselView = findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
 
-       /* carouselView.setImageListener(new ImageListener() {
+        carouselView.setImageListener(new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(sampleImages[position]);
@@ -55,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(int position) {
 
             }
-        });*/
+        });
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -165,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     void logout(){
           finish();
           Intent a = new Intent(this,MainActivity.class);
-          USUARIO=new Persona();
+          USUARIO=new Usuario();
           existeUsuario=false;
           startActivity(a);
     }

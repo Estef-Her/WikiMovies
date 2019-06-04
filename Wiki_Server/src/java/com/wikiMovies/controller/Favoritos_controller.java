@@ -5,8 +5,8 @@
  */
 package com.wikiMovies.controller;
 
+import com.wikiMovies.domain.FavoritosId;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Addiel
  */
-@WebServlet(name = "WikiGenero", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID"})
-public class WikiGenero extends HttpServlet {
+@WebServlet(name = "Favoritos", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID"})
+public class Favoritos_controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +32,21 @@ public class WikiGenero extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+  protected void processRequest(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
         switch(request.getServletPath()){
-            case "/createWiki":
+            case "/createFavorito":
                 this.doCreate(request,response);
                 break;
-            case "/updateWiki":
+            case "/updateFavorito":
                 this.doUpdate(request,response);
                 break;
-            case "/findAllWiki":
+            case "/findAllFav":
                 this.getAll(request,response);
-                break;
-            case "/finWikiByID":
+                break;    
+            case "/findFavID":
                 this.getByID(request,response);
-                break;     
+                break;    
             default:
                try{
                 request.getRequestDispatcher("Home.jsp").
@@ -74,15 +74,15 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (SQLException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      try {
+          processRequest(request, response);
+      } catch (SQLException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (InstantiationException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IllegalAccessException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
 
     /**
@@ -96,15 +96,15 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (SQLException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(WikiGenero.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      try {
+          processRequest(request, response);
+      } catch (SQLException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (InstantiationException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IllegalAccessException ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
 
     /**
@@ -118,11 +118,18 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     }// </editor-fold>
 
     private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String id = (String)request.getParameter("id");
+        String usuario = (String)request.getParameter("usuario");
+        String pelicula = (String)request.getParameter("pelicula");
+        int puntuacion = (Integer.valueOf(request.getParameter("puntuacion")));
+        Favoritos_controller fav  = new Favoritos_controller();
+        FavoritosId favId = new FavoritosId();
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String usuario = (String)request.getParameter("usuario");
+        String pelicula = (String)request.getParameter("pelicula");
+        int puntuacion = (Integer.valueOf(request.getParameter("puntuacion")));
     }
 
     private void getAll(HttpServletRequest request, HttpServletResponse response) {
@@ -130,7 +137,8 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     }
 
     private void getByID(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String usuario = (String)request.getParameter("usuario");
+        String pelicula = (String)request.getParameter("pelicula");
     }
 
 }

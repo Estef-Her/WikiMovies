@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 
 
 import static org.junit.Assert.*;
-import com.example.wikimovies.Datos.Modelo;
 
 
 /**
