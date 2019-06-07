@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".Activity.MainActivity">
 
+<<<<<<< HEAD
     <TableLayout
         android:id="@+id/panel1"
         android:layout_width="match_parent"
@@ -89,4 +90,16 @@
     </TableLayout>
 
 
+=======
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carouselView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:fillColor="#E01C25"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp" />
+>>>>>>> 7d4be3e2581170dd0ace7978d4c1112ba425bb17
 </LinearLayout>
