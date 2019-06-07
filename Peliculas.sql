@@ -1,7 +1,6 @@
-DROP table Wiki_Generos;
-DROP table Usuario;
-DROP table Favoritos;
-
+DROP table Wiki_Generos CASCADE CONSTRAINTS;
+DROP table Favoritos CASCADE CONSTRAINTS;
+DROP table Usuario CASCADE CONSTRAINTS;
 
 Create table Usuario (
     nombre varchar(100),
@@ -25,56 +24,14 @@ Create table Favoritos(
     usuario varchar(50) not null,
     pelicula varchar(80) not null,
     puntuacion number,
-    constraint pkFavorito primary key(usuario,pelicula)
+    constraint pkFavorito primary key(usuario,pelicula),
 	constraint fkFavorito foreign key (usuario) references Usuario(email)
 );
 
+insert into Usuario values('Estefany','Hernandez Arce',22,'1','12345678','dh17376334@gmail.com','Usuario');
+insert into Wiki_Generos values('dh17376334@gmail.com','Terror');
+insert into Wiki_Generos values('dh17376334@gmail.com','Suspense');
+insert into Wiki_Generos values('dh17376334@gmail.com','Crimen');
+insert into Wiki_Generos values('dh17376334@gmail.com','Documental');
 
-
-/*CREATE SEQUENCE NUMERO_SEQ START WITH 1 INCREMENT BY 1 CACHE 20;
-CREATE OR REPLACE TRIGGER peli_det_seq
-  BEFORE INSERT ON Pelicula
-  referencing old as old new as new
-  FOR EACH ROW
-BEGIN
-  :new.codigo := NUMERO_SEQ.nextval;
-END peli_det_seq;
-/*/
 commit;
-
-
-CREATE OR REPLACE PROCEDURE crearUsuario (xnombre in Usuario.nombre%TYPE, xapellidos in Usuario.apellidos%TYPE, xpassword in Usuario.password%TYPE, xemail in Usuario.email%TYPE, xedad in Usuario.edad%TYPE, xsexo in Usuario.sexo%TYPE)
-    IS
-    BEGIN
-        INSERT into Usuario (nombre,apellidos,password,email,edad,sexo) VALUES(xnombre,xapellidos,xpassword,xemail,xedad,xsexo); 
-        COMMIT;
-    END;
-    /
-	
-CREATE OR REPLACE PROCEDURE crearGeneros(xpersona in VARCHAR, xdescripcion in VARCHAR)
-    IS
-    BEGIN
-        INSERT into Genero (usuario,descripcion) VALUES(xpersona,xdescripcion); 
-        COMMIT;
-    END crearGeneros;
-    /
-	
-CREATE OR REPLACE FUNCTION verGustos(xemail in varchar) RETURN SYS_REFCURSOR
-    IS 
-    c SYS_REFCURSOR;
-    BEGIN
-        OPEN c FOR SELECT *FROM Genero WHERE usuario = xemail;
-         RETURN c; 
-         CLOSE c;  
-    END;
-    /
-	
-	CREATE OR REPLACE FUNCTION verUsuarioXGenero(xdescripcion in varchar) RETURN SYS_REFCURSOR
-    IS 
-    c SYS_REFCURSOR;
-    BEGIN
-        OPEN c FOR SELECT *FROM Genero WHERE descripcion = xdescripcion;
-         RETURN c; 
-         CLOSE c;  
-    END;
-    /
