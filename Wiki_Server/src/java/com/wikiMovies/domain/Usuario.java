@@ -1,11 +1,15 @@
 package com.wikiMovies.domain;
-// Generated Jun 2, 2019 12:33:37 PM by Hibernate Tools 4.3.1
+// Generated Jun 6, 2019 10:59:50 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +29,8 @@ public class Usuario  implements java.io.Serializable {
      private String sexo;
      private String password;
      private String rol;
+     private Set favoritoses = new HashSet(0);
+     private Set wikiGeneroses = new HashSet(0);
 
     public Usuario() {
     }
@@ -33,7 +39,7 @@ public class Usuario  implements java.io.Serializable {
     public Usuario(String email) {
         this.email = email;
     }
-    public Usuario(String email, String nombre, String apellidos, BigDecimal edad, String sexo, String password, String rol) {
+    public Usuario(String email, String nombre, String apellidos, BigDecimal edad, String sexo, String password, String rol, Set favoritoses, Set wikiGeneroses) {
        this.email = email;
        this.nombre = nombre;
        this.apellidos = apellidos;
@@ -41,6 +47,18 @@ public class Usuario  implements java.io.Serializable {
        this.sexo = sexo;
        this.password = password;
        this.rol = rol;
+       this.favoritoses = favoritoses;
+       this.wikiGeneroses = wikiGeneroses;
+    }
+
+    public Usuario(String email, String nombre, String apellidos, BigDecimal edad, String sexo, String password, String rol) {
+        this.email = email;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.password = password;
+        this.rol = rol;
     }
    
      @Id 
@@ -113,6 +131,24 @@ public class Usuario  implements java.io.Serializable {
     
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
+    public Set getFavoritoses() {
+        return this.favoritoses;
+    }
+    
+    public void setFavoritoses(Set favoritoses) {
+        this.favoritoses = favoritoses;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
+    public Set getWikiGeneroses() {
+        return this.wikiGeneroses;
+    }
+    
+    public void setWikiGeneroses(Set wikiGeneroses) {
+        this.wikiGeneroses = wikiGeneroses;
     }
 
 

@@ -19,6 +19,7 @@
             android:background="#54A2D6"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="WikiMovies"
+            android:gravity="center_vertical|center_horizontal"
             app:titleMarginStart="150dp" />
 
         <com.synnapps.carouselview.CarouselView

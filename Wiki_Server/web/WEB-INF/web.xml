@@ -5,13 +5,9 @@
         <servlet-class>com.wikiMovies.controller.Login_controller</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Usuario_Service</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Usuario_Service</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Pelicula</servlet-name>
-        <servlet-class>com.wikiMovies.controller.Pelicula_controller</servlet-class>
-    </servlet>
+        <servlet-name>Usuario</servlet-name>
+        <servlet-class>com.wikiMovies.controller.Usuario_controller</servlet-class>
+    </servlet>    
     <servlet>
         <servlet-name>WikiGenero</servlet-name>
         <servlet-class>com.wikiMovies.controller.WikiGenero_controller</servlet-class>
@@ -29,38 +25,26 @@
         <url-pattern>/doLogout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario_Service</servlet-name>
+        <servlet-name>Usuario</servlet-name>
         <url-pattern>/createUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario_Service</servlet-name>
+        <servlet-name>Usuario</servlet-name>
         <url-pattern>/updateUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario_Service</servlet-name>
+        <servlet-name>Usuario</servlet-name>
         <url-pattern>/findAllUser</url-pattern>
     </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>Usuario</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Usuario_Service</servlet-name>
+        <servlet-name>Usuario</servlet-name>
         <url-pattern>/finUserByID</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Pelicula</servlet-name>
-        <url-pattern>/createPeli</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Pelicula</servlet-name>
-        <url-pattern>/updatePeli</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Pelicula</servlet-name>
-        <url-pattern>/findAllPelis</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Pelicula</servlet-name>
-        <url-pattern>/finPeliByID</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+   <servlet-mapping>
         <servlet-name>WikiGenero</servlet-name>
         <url-pattern>/createWiki</url-pattern>
     </servlet-mapping>
@@ -77,6 +61,10 @@
         <url-pattern>/finWikiByID</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>WikiGenero</servlet-name>
+        <url-pattern>/deleteGenr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Favoritos</servlet-name>
         <url-pattern>/createFavorito</url-pattern>
     </servlet-mapping>
@@ -91,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>Favoritos</servlet-name>
         <url-pattern>/findFavID</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>Favoritos</servlet-name>
+        <url-pattern>/deleteFavorite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

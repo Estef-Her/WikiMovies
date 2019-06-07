@@ -49,7 +49,6 @@ Contributor(s):
     <mapping class="com.wikiMovies.domain.WikiGenerosId"/>
     <mapping class="com.wikiMovies.domain.FavoritosId"/>
     <mapping class="com.wikiMovies.domain.Usuario"/>
-    <mapping class="com.wikiMovies.domain.Pelicula"/>
     <mapping class="com.wikiMovies.domain.WikiGeneros"/>
     <mapping class="com.wikiMovies.domain.Favoritos"/>
   </session-factory>

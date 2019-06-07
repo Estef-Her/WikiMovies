@@ -25,8 +25,8 @@ Create table Favoritos(
     usuario varchar(50) not null,
     pelicula varchar(80) not null,
     puntuacion number,
-    constraint pkFavorito primary key(usuario,pelicula),
-    constraint fkFavorito foreign key (pelicula) references Pelicula(nombre)
+    constraint pkFavorito primary key(usuario,pelicula)
+	constraint fkFavorito foreign key (usuario) references Usuario(email)
 );
 
 

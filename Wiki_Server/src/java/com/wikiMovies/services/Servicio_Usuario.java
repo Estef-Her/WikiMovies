@@ -47,6 +47,11 @@ public class Servicio_Usuario implements Services_Interface<Usuario,Integer> {
     public List<Usuario> findAll() {
         return this.user.findAll();
     }
+    
+     public Usuario findByEmail(String e) {
+        return this.user.findByEmail(e);
+    }
+    
     public Usuario doLogin(Usuario o){
         return this.user.findByData(o.getEmail(), o.getPassword());
     }

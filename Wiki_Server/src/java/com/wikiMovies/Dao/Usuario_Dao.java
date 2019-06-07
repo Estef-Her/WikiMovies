@@ -86,7 +86,24 @@ public class Usuario_Dao extends HibernateUtil implements IBaseDAO<Usuario,Integ
         }
          return user;
     }
-
+     public Usuario findByEmail(String email){
+        Usuario u = null;
+        List<Usuario> ol = new ArrayList();
+        try{
+            operationStart();
+            String sql = "select *from Usuario where email="+"'"+email+"';";
+            ol = getSesion().createSQLQuery(sql).addEntity(Usuario.class).list();
+            u = ol.get(0);
+            
+        }catch(HibernateException he){
+        handleException(he);
+            throw he;
+        }
+         finally{
+        getSesion().close();
+        }
+        return u;
+    }
     @Override
     public List<Usuario> findAll() {
          List<Usuario> users = new ArrayList();

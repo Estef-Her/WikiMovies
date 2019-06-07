@@ -1,5 +1,5 @@
 package com.wikiMovies.domain;
-// Generated Jun 2, 2019 12:33:37 PM by Hibernate Tools 4.3.1
+// Generated Jun 6, 2019 10:59:50 PM by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;

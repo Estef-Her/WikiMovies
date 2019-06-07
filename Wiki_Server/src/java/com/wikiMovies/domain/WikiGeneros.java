@@ -1,5 +1,5 @@
 package com.wikiMovies.domain;
-// Generated Jun 2, 2019 12:33:37 PM by Hibernate Tools 4.3.1
+// Generated Jun 6, 2019 10:59:50 PM by Hibernate Tools 4.3.1
 
 
 import javax.persistence.AttributeOverride;
@@ -7,6 +7,9 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,12 +23,14 @@ public class WikiGeneros  implements java.io.Serializable {
 
 
      private WikiGenerosId id;
+     private Usuario usuario;
 
     public WikiGeneros() {
     }
 
-    public WikiGeneros(WikiGenerosId id) {
+    public WikiGeneros(WikiGenerosId id, Usuario usuario) {
        this.id = id;
+       this.usuario = usuario;
     }
    
      @EmbeddedId
@@ -40,6 +45,16 @@ public class WikiGeneros  implements java.io.Serializable {
     
     public void setId(WikiGenerosId id) {
         this.id = id;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="USUARIO", nullable=false, insertable=false, updatable=false)
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 

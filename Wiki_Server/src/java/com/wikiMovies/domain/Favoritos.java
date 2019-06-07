@@ -1,5 +1,5 @@
 package com.wikiMovies.domain;
-// Generated Jun 2, 2019 12:33:37 PM by Hibernate Tools 4.3.1
+// Generated Jun 6, 2019 10:59:50 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -24,20 +24,20 @@ public class Favoritos  implements java.io.Serializable {
 
 
      private FavoritosId id;
-     private Pelicula pelicula;
+     private Usuario usuario;
      private BigDecimal puntuacion;
 
     public Favoritos() {
     }
 
 	
-    public Favoritos(FavoritosId id, Pelicula pelicula) {
+    public Favoritos(FavoritosId id, Usuario usuario) {
         this.id = id;
-        this.pelicula = pelicula;
+        this.usuario = usuario;
     }
-    public Favoritos(FavoritosId id, Pelicula pelicula, BigDecimal puntuacion) {
+    public Favoritos(FavoritosId id, Usuario usuario, BigDecimal puntuacion) {
        this.id = id;
-       this.pelicula = pelicula;
+       this.usuario = usuario;
        this.puntuacion = puntuacion;
     }
    
@@ -45,7 +45,7 @@ public class Favoritos  implements java.io.Serializable {
 
     
     @AttributeOverrides( {
-        @AttributeOverride(name="usuario", column=@Column(name="USUARIO", nullable=false, length=50) ), 
+        @AttributeOverride(name="usuario", column=@Column(name="USUARIO", nullable=false, length=100) ), 
         @AttributeOverride(name="pelicula", column=@Column(name="PELICULA", nullable=false, length=80) ) } )
     public FavoritosId getId() {
         return this.id;
@@ -56,13 +56,13 @@ public class Favoritos  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="PELICULA", nullable=false, insertable=false, updatable=false)
-    public Pelicula getPelicula() {
-        return this.pelicula;
+    @JoinColumn(name="USUARIO", nullable=false, insertable=false, updatable=false)
+    public Usuario getUsuario() {
+        return this.usuario;
     }
     
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     
