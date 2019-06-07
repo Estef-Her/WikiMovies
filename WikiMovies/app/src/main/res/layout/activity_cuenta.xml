@@ -26,7 +26,8 @@
         android:enabled="false"
         android:hint="Nombre"
         android:inputType="text"
-        android:textColor="#FD030303" />
+        android:textColor="#FD030303"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editarApellidos"
@@ -94,8 +95,8 @@
         android:id="@+id/editarBotoonChangePassword"
         android:layout_width="173dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
         android:background="#D69463"
         android:text="Cambiar Contraseña"
         android:textColor="#000000" />
@@ -124,7 +125,8 @@
         android:inputType="textPassword"
         android:textColor="#FD030303"
         android:textColorHint="#969595"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editarPassword2"
@@ -137,7 +139,8 @@
         android:inputType="textPassword"
         android:textColor="#FD030303"
         android:textColorHint="#969595"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:autofillHints="" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/editarBootonSave2"
@@ -166,6 +169,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         app:srcCompat="@drawable/geek2" />
+
+
 
 
 </LinearLayout>
