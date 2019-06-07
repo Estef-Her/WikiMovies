@@ -49,5 +49,6 @@
     <string name="iniciar">Iniciar</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
+    <string name="welcomeMessage">Bienvenido a WikiMovies</string>
 
 </resources>

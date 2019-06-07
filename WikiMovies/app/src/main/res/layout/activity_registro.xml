@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent" android:layout_height="fill_parent" android:padding="20dip" android:orientation="vertical"
     tools:context=".Activity.registro"
     android:background="@color/Lavender">
+
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
+    >
     <EditText android:id="@+id/userNombre" android:layout_height="wrap_content" android:layout_width="fill_parent"
         android:hint="Nombre" android:inputType="text" />
 
@@ -87,7 +94,7 @@
         android:layout_marginBottom="40dip"
         android:gravity="center"
         android:text="Ya tienes cuenta! Accede!"
-        android:textColor="#0b84aa"
+        android:textColor="@color/myorange"
         android:textSize="20dip" />
 
     <TextView
@@ -100,6 +107,14 @@
         android:gravity="center"
         android:textColor="#AA0B10"
         android:textSize="20dip" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/geek2" />
+</TableLayout>
 
 
 

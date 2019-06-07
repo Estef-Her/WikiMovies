@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/Lavender"
     tools:context=".Activity.cuenta">
 
     <ImageView
@@ -13,6 +14,7 @@
         android:layout_height="158dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:layout_marginLeft="10dp"
         app:srcCompat="@drawable/user2" />
 
     <EditText
@@ -51,6 +53,7 @@
         android:id="@+id/editarBootonEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="290dp"
         android:background="#54A2D6"
         app:backgroundTint="#54A2D6"
@@ -78,8 +81,9 @@
 
     <EditText
         android:id="@+id/editarEmail"
-        android:layout_width="match_parent"
+        android:layout_width="285dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:enabled="false"
         android:hint="Email"
@@ -91,6 +95,7 @@
         android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
         android:background="#D69463"
         android:text="Cambiar Contraseña"
         android:textColor="#000000" />
@@ -101,7 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-48dp"
+        android:layout_marginRight="-20dp"
         android:background="#D69463"
         android:text="Actualizar generos Favoritos"
         android:textColor="#000000"
@@ -114,6 +120,7 @@
         android:layout_marginTop="15dp"
         android:enabled="false"
         android:hint="Contraseña Actual"
+        android:layout_marginLeft="10dp"
         android:inputType="textPassword"
         android:textColor="#FD030303"
         android:textColorHint="#969595"
@@ -153,7 +160,12 @@
         android:textColor="#AA0B10"
         android:textSize="20dip"
         android:visibility="visible" />
-
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/geek2" />
 
 
 </LinearLayout>
