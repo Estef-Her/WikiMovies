@@ -5,10 +5,14 @@
  */
 package com.wikiMovies.controller;
 
+import com.google.gson.Gson;
 import com.wikiMovies.domain.Usuario;
+import com.wikiMovies.services.Service;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,12 +20,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 /**
  *
  * @author Addiel
  */
-@WebServlet(name = "Usuario_Service", urlPatterns = {"/createUser", "/updateUser","/findAllUser","/finUserByID"})
+@WebServlet(name = "Usuario", urlPatterns = {"/createUser", "/updateUser","/findAllUser","/finUserByID","/deleteUser"})
 public class Usuario_controller extends HttpServlet {
 
    
@@ -49,10 +54,13 @@ public class Usuario_controller extends HttpServlet {
                 break;
             case "/finUserByID":
                 this.getByID(request,response);
-                break;      
+                break;    
+            case "/deleteUser": 
+                this.delete(request,response);
+                break;    
             default:
                try{
-                request.getRequestDispatcher("Home.jsp").
+                request.getRequestDispatcher("index.html").
                         forward( request, response);
                 }
                catch(Exception e){ 
@@ -120,7 +128,9 @@ public class Usuario_controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) {
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
         String nombre = (String)request.getParameter("nombre");
         String apellidos = (String)request.getParameter("apellidos");
         BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
@@ -129,9 +139,14 @@ public class Usuario_controller extends HttpServlet {
         String email = (String)request.getParameter("email");
         String rol = (String)request.getParameter("rol");
         Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
+        Service.instance().getServicio_Usuario().add(u);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
         String nombre = (String)request.getParameter("nombre");
         String apellidos = (String)request.getParameter("apellidos");
         BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
@@ -140,14 +155,48 @@ public class Usuario_controller extends HttpServlet {
         String email = (String)request.getParameter("email");
         String rol = (String)request.getParameter("rol");
         Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
+        Service.instance().getServicio_Usuario().merge(u);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void getAll(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @SuppressWarnings("empty-statement")
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();        
+        ArrayList<Usuario> users =  (ArrayList<Usuario>)   Service.instance().getServicio_Usuario().findAll();       
+        while(users.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(Usuario c: users){
+           jsArray.put(c);
+        }
+        String us = gson.toJson(jsArray);
+        out.write(us);
     }
 
-    private void getByID(HttpServletRequest request, HttpServletResponse response) {
-       String email = (String)request.getParameter("email");
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+       PrintWriter out = response.getWriter(); 
+       Gson gson = new Gson(); 
+       String email = (String)request.getParameter("email");       
+       Usuario u =  (Usuario)Service.instance().getServicio_Usuario().findByEmail(email);               
+       String us = gson.toJson(u);
+       out.write(us);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String nombre = (String)request.getParameter("nombre");
+        String apellidos = (String)request.getParameter("apellidos");
+        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
+        String sexo = (String)request.getParameter("sexo");
+        String password = (String)request.getParameter("key");
+        String email = (String)request.getParameter("email");
+        String rol = (String)request.getParameter("rol");
+        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
+        Service.instance().getServicio_Usuario().delete(u);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
 }

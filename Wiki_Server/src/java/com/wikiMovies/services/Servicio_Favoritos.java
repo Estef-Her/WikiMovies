@@ -47,4 +47,9 @@ public class Servicio_Favoritos implements Services_Interface<Favoritos,Integer>
     public List<Favoritos> findAll() {
         return this.fav.findAll();
     }
+    
+    public List<Favoritos> findByEmail(String e) {
+        return this.fav.findByKey(e);
+    }
+    
 }

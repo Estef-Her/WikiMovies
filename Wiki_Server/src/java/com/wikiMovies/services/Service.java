@@ -12,8 +12,7 @@ package com.wikiMovies.services;
 public class Service {
     private static Service uniqueInstance;
     public Servicio_Favoritos sf;
-    public Servicio_Usuario su;
-    public Servicio_Pelicula sp;
+    public Servicio_Usuario su;   
     public Servicio_WikiGeneros sw;
     public static Service instance(){
         if (uniqueInstance == null){
@@ -28,10 +27,6 @@ public class Service {
 
     public Servicio_Usuario getServicio_Usuario() {
         return su;
-    }
-
-    public Servicio_Pelicula getServicio_Pelicula() {
-        return sp;
     }
 
     public Servicio_WikiGeneros getServicio_WikiGeneros() {

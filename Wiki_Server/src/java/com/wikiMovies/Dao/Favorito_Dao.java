@@ -6,6 +6,7 @@
 package com.wikiMovies.Dao;
 
 import com.wikiMovies.domain.Favoritos;
+import com.wikiMovies.domain.Usuario;
 import com.wikiMovies.utils.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,21 @@ public class Favorito_Dao extends HibernateUtil implements IBaseDAO<Favoritos,In
     return listaFav;
     }
 
-    
+     public List<Favoritos> findByKey(String email){        
+        List<Favoritos> favs = new ArrayList();
+        try{
+            operationStart();
+            String sql = "select distinct *from Favoritos where email="+"'"+email+"';";
+            favs = getSesion().createSQLQuery(sql).addEntity(Favoritos.class).list();           
+            
+        }catch(HibernateException he){
+        handleException(he);
+            throw he;
+        }
+         finally{
+        getSesion().close();
+        }
+        return favs;
+    }
     
 }

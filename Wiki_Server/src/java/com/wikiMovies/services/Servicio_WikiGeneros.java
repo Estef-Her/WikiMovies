@@ -47,4 +47,8 @@ public class Servicio_WikiGeneros implements Services_Interface<WikiGeneros,Inte
     public List<WikiGeneros> findAll() {
         return this.wiki.findAll();
     }
+    
+       public List<WikiGeneros> findByEmail(String e) {
+        return this.wiki.findByKey(e);
+    }
 }

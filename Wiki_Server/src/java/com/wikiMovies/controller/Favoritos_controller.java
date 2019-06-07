@@ -5,9 +5,16 @@
  */
 package com.wikiMovies.controller;
 
+import com.google.gson.Gson;
+import com.wikiMovies.domain.Favoritos;
 import com.wikiMovies.domain.FavoritosId;
+import com.wikiMovies.domain.Usuario;
+import com.wikiMovies.services.Service;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -15,12 +22,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 /**
  *
  * @author Addiel
  */
-@WebServlet(name = "Favoritos", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID"})
+@WebServlet(name = "Favoritos", urlPatterns = {"/createFavorito", "/updateFavorito","/findAllFav","/findFavID","/deleteFavorite"})
 public class Favoritos_controller extends HttpServlet {
 
     /**
@@ -46,10 +54,13 @@ public class Favoritos_controller extends HttpServlet {
                 break;    
             case "/findFavID":
                 this.getByID(request,response);
+                break;
+            case "/deleteFavorite":
+                this.delete(request,response);
                 break;    
             default:
                try{
-                request.getRequestDispatcher("Home.jsp").
+                request.getRequestDispatcher("index.html").
                         forward( request, response);
                 }
                catch(Exception e){ 
@@ -117,28 +128,78 @@ public class Favoritos_controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        String id = (String)request.getParameter("id");
-        String usuario = (String)request.getParameter("usuario");
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
         String pelicula = (String)request.getParameter("pelicula");
-        int puntuacion = (Integer.valueOf(request.getParameter("puntuacion")));
-        Favoritos_controller fav  = new Favoritos_controller();
-        FavoritosId favId = new FavoritosId();
+        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
+        FavoritosId favId = new FavoritosId(email,pelicula);
+        Favoritos fav = new Favoritos(favId,aux,puntuacion);
+        Service.instance().getServicio_Favoritos().add(fav);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        String usuario = (String)request.getParameter("usuario");
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
         String pelicula = (String)request.getParameter("pelicula");
-        int puntuacion = (Integer.valueOf(request.getParameter("puntuacion")));
+        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
+        FavoritosId favId = new FavoritosId(email,pelicula);
+        Favoritos fav = new Favoritos(favId,aux,puntuacion);
+        Service.instance().getServicio_Favoritos().merge(fav);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void getAll(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  @SuppressWarnings("empty-statement")
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+       PrintWriter out = response.getWriter();
+       Gson gson = new Gson(); 
+       ArrayList<Favoritos> favoritos =  (ArrayList<Favoritos>) Service.instance().getServicio_Favoritos().findAll();       
+        while(favoritos.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(Favoritos c: favoritos){
+           jsArray.put(c);
+        }
+        String favs = gson.toJson(jsArray);
+        out.write(favs);
     }
 
-    private void getByID(HttpServletRequest request, HttpServletResponse response) {
-        String usuario = (String)request.getParameter("usuario");
+  @SuppressWarnings("empty-statement")
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson(); 
+        String email = (String)request.getParameter("email");         
+        ArrayList<Favoritos> favoritos =  (ArrayList<Favoritos>) Service.instance().getServicio_Favoritos().findByEmail(email);;       
+        while(favoritos.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(Favoritos c: favoritos){
+           jsArray.put(c);
+        }
+        String favs = gson.toJson(jsArray);
+        out.write(favs);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
         String pelicula = (String)request.getParameter("pelicula");
+        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
+        FavoritosId favId = new FavoritosId(email,pelicula);
+        Favoritos fav = new Favoritos(favId,aux,puntuacion);
+        Service.instance().getServicio_Favoritos().delete(fav);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
 }

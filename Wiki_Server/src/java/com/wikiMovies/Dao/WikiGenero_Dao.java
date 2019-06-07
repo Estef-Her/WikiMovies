@@ -102,5 +102,22 @@ public class WikiGenero_Dao extends HibernateUtil implements IBaseDAO<WikiGenero
     return generos;
     }
 
+    public List<WikiGeneros> findByKey(String email){        
+        List<WikiGeneros> generos = new ArrayList();
+        try{
+            operationStart();
+            String sql = "select distinct *from Wiki_Generos where email="+"'"+email+"';";
+            generos = getSesion().createSQLQuery(sql).addEntity(WikiGeneros.class).list();           
+            
+        }catch(HibernateException he){
+        handleException(he);
+            throw he;
+        }
+         finally{
+        getSesion().close();
+        }
+        return generos;
+    }
+    
     
 }

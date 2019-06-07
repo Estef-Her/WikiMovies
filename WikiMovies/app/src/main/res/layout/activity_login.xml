@@ -22,10 +22,7 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="308dp"
-        android:layout_height="257dp">
+
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -109,6 +106,6 @@
                 android:textColor="#AA0B10"
                 android:textSize="20dip" />
         </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>
 

@@ -5,11 +5,15 @@
  */
 package com.wikiMovies.controller;
 
+import com.google.gson.Gson;
+import com.wikiMovies.domain.Usuario;
 import com.wikiMovies.domain.WikiGeneros;
 import com.wikiMovies.domain.WikiGenerosId;
+import com.wikiMovies.services.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,12 +21,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 /**
  *
  * @author Addiel
  */
-@WebServlet(name = "WikiGenero", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID"})
+@WebServlet(name = "WikiGenero", urlPatterns = {"/createWiki", "/updateWiki","/findAllWiki","/finWikiByID","/deleteGenr"})
 public class WikiGenero_controller extends HttpServlet {
 
     /**
@@ -48,10 +53,13 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
                 break;
             case "/finWikiByID":
                 this.getByID(request,response);
-                break;     
+                break;
+            case "/deleteGenr":
+                this.delete(request,response);
+                break;    
             default:
                try{
-                request.getRequestDispatcher("Home.jsp").
+                request.getRequestDispatcher("index.html").
                         forward( request, response);
                 }
                catch(Exception e){ 
@@ -119,27 +127,75 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) {
-        String usuario = (String)request.getParameter("usuario");
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
         String descripcion = (String)request.getParameter("descrip");        
-        WikiGenerosId wikiId = new WikiGenerosId(usuario,descripcion);
-        WikiGeneros wiki = new WikiGeneros();
-       
+        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
+        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
+        Service.instance().getServicio_WikiGeneros().add(wiki);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) {
-        String usuario = (String)request.getParameter("usuario");
-        String descripcion = (String)request.getParameter("descrip");
-        WikiGenerosId wikiId = new WikiGenerosId(usuario,descripcion);
-        WikiGeneros wiki = new WikiGeneros();
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
+        String descripcion = (String)request.getParameter("descrip");        
+        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
+        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
+        Service.instance().getServicio_WikiGeneros().merge(wiki);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
-    private void getAll(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+@SuppressWarnings("empty-statement")
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();        
+        ArrayList<WikiGeneros> generos =  (ArrayList<WikiGeneros>)  Service.instance().getServicio_WikiGeneros().findAll();;       
+        while(generos.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(WikiGeneros c: generos){
+           jsArray.put(c);
+        }
+        String generes = gson.toJson(jsArray);
+        out.write(generes);
     }
 
-    private void getByID(HttpServletRequest request, HttpServletResponse response) {
-         String usuario = (String)request.getParameter("usuario");
+@SuppressWarnings("empty-statement")
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+         PrintWriter out = response.getWriter();
+         Gson gson = new Gson(); 
+         String email = (String)request.getParameter("email");        
+        ArrayList<WikiGeneros> generos =  (ArrayList<WikiGeneros>)  Service.instance().getServicio_WikiGeneros().findByEmail(email);       
+        while(generos.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(WikiGeneros c: generos){
+           jsArray.put(c);
+        }
+        String generes = gson.toJson(jsArray);
+        out.write(generes);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario aux = new Usuario();
+        aux.setEmail(email);
+        String descripcion = (String)request.getParameter("descrip");        
+        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
+        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
+        Service.instance().getServicio_WikiGeneros().delete(wiki);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
     }
 
 }
