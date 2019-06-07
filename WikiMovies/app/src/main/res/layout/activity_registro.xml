@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent" android:layout_height="fill_parent" android:padding="20dip" android:orientation="vertical"
-    tools:context=".Activity.registro">
-
+    tools:context=".Activity.registro"
+    android:background="@color/Lavender">
     <EditText android:id="@+id/userNombre" android:layout_height="wrap_content" android:layout_width="fill_parent"
         android:hint="Nombre" android:inputType="text" />
 
@@ -73,9 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-30dp"
-        android:background="#54A2D6"
         android:paddingLeft="15dip"
         android:paddingRight="15dip"
+        android:background="@color/myblue"
         android:text="Regsitrarse"
         android:textColor="#FFFDFD" />
 
