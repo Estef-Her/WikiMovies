@@ -15,14 +15,11 @@ import java.util.List;
  */
 public class Servicio_Usuario implements Services_Interface<Usuario,Integer> {
     Usuario_Dao user = new Usuario_Dao();
-    private static Servicio_Usuario uniqueInstance;
-    public static Servicio_Usuario instance(){
-        if (uniqueInstance == null){
-            uniqueInstance = new Servicio_Usuario();
-        }
-        return uniqueInstance;
-    }    
+  
 
+    public Servicio_Usuario() {
+    }
+    
     @Override
     public void add(Usuario o) {
        this.user.add(o);

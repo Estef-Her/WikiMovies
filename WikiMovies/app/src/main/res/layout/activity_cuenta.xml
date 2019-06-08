@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/Lavender"
+    android:orientation="vertical"
     tools:context=".Activity.cuenta">
 
     <ImageView
         android:id="@+id/photoPerfil"
         android:layout_width="145dp"
         android:layout_height="158dp"
+        android:layout_marginLeft="10dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:layout_marginLeft="10dp"
         app:srcCompat="@drawable/user2" />
 
     <EditText
@@ -23,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="-140dp"
+        android:autofillHints=""
         android:enabled="false"
         android:hint="Nombre"
         android:inputType="text"
-        android:textColor="#FD030303"
-        android:autofillHints="" />
+        android:textColor="#FD030303" />
 
     <EditText
         android:id="@+id/editarApellidos"
@@ -37,7 +38,7 @@
         android:enabled="false"
         android:hint="Apellidos"
         android:inputType="text"
-        android:textColor="#FD030303"/>
+        android:textColor="#FD030303" />
 
     <EditText
         android:id="@+id/editarEdad"
@@ -47,18 +48,18 @@
         android:enabled="false"
         android:hint="Edad"
         android:inputType="number"
-        android:textSize="18sp"
-        android:textColor="#FD030303"/>
+        android:textColor="#FD030303"
+        android:textSize="18sp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/editarBootonEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="290dp"
+        android:layout_marginTop="10dp"
         android:background="#54A2D6"
         app:backgroundTint="#54A2D6"
-        app:srcCompat="@drawable/editar"/>
+        app:srcCompat="@drawable/editar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/editarBootonSave1"
@@ -67,9 +68,9 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="-58dp"
         android:background="#11963E"
+        android:visibility="invisible"
         app:backgroundTint="#11963E"
-        app:srcCompat="@drawable/save"
-        android:visibility="invisible"/>
+        app:srcCompat="@drawable/save" />
 
     <TextView
         android:id="@+id/editarMessage1"
@@ -91,42 +92,69 @@
         android:inputType="textEmailAddress"
         android:textColor="#FD030303" />
 
-    <Button
-        android:id="@+id/editarBotoonChangePassword"
-        android:layout_width="173dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:background="#D69463"
-        android:text="Cambiar Contraseña"
-        android:textColor="#000000" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp">
 
-    <Button
-        android:id="@+id/editarBotoonUpdateGeneros"
-        android:layout_width="173dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="-48dp"
-        android:layout_marginRight="-20dp"
-        android:background="#D69463"
-        android:text="Actualizar generos Favoritos"
-        android:textColor="#000000"
-        android:visibility="visible" />
+        <Button
+            android:id="@+id/editarBotoonChangePassword"
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#D69463"
+            android:text="Cambiar Contraseña"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/editarBotoonUpdateGeneros"
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#D69463"
+            android:text="Actualizar generos Favoritos"
+            android:textColor="#000000"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/editarBotoonUpdateGeneros"
+            app:layout_constraintHorizontal_bias="0.581"
+            app:layout_constraintStart_toEndOf="@+id/editarBotoonChangePassword"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </android.support.constraint.ConstraintLayout>
 
     <EditText
         android:id="@+id/editarPassword1"
         android:layout_width="185dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
+        android:autofillHints=""
         android:enabled="false"
         android:hint="Contraseña Actual"
-        android:layout_marginLeft="10dp"
         android:inputType="textPassword"
         android:textColor="#FD030303"
         android:textColorHint="#969595"
-        android:visibility="visible"
-        android:autofillHints="" />
+        android:visibility="visible" />
 
     <EditText
         android:id="@+id/editarPassword2"
@@ -134,13 +162,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:layout_marginTop="-45dp"
+        android:autofillHints=""
         android:enabled="false"
         android:hint="Nueva Contraseña"
         android:inputType="textPassword"
         android:textColor="#FD030303"
         android:textColorHint="#969595"
-        android:visibility="visible"
-        android:autofillHints="" />
+        android:visibility="visible" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/editarBootonSave2"
@@ -163,14 +191,13 @@
         android:textColor="#AA0B10"
         android:textSize="20dip"
         android:visibility="visible" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         app:srcCompat="@drawable/geek2" />
-
-
 
 
 </LinearLayout>

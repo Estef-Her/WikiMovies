@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
     void login(){
-        finish();
         Intent a = new Intent(this, login.class);
         startActivity(a);
     }

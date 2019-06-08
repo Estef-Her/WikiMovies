@@ -2,7 +2,7 @@ package com.example.wikimovies.Controller;
 
 
 import com.example.wikimovies.Datos.Favorito;
-import com.example.wikimovies.Datos.PeliGeneros;
+import com.example.wikimovies.Datos.Genero;
 import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.Model.DatosModel;
 
@@ -47,9 +47,9 @@ public class DataController {
         }
         return resul;
     }
-    public PeliGeneros buscarGeneroXId(String user){
-        PeliGeneros resul=null;
-        for(PeliGeneros p : model.getGeneros()){
+    public Genero buscarGeneroXId(String user){
+        Genero resul=null;
+        for(Genero p : model.getGeneros()){
             if(p.getUsuario()==user){
                 resul=p;
             }
@@ -66,7 +66,7 @@ public class DataController {
         u.setPassword(jsonObject.getString("key"));
         u.setSexo(jsonObject.getString("sexo"));
         u.setRol(jsonObject.getString("rol"));
-        u.setGenerosPelis((List<PeliGeneros>) this.buscarGeneroXId(u.getEmail()));
+        u.setGenerosPelis((List<Genero>) this.buscarGeneroXId(u.getEmail()));
         u.setPelisFavoritas((List<Favorito>) this.buscarFavoritosXId(u.getEmail()));
     }
 
@@ -91,7 +91,7 @@ public class DataController {
             u.setRol(rol);
             u.setNombre(nombre);
             u.setApellidos(apellidos);
-            u.setGenerosPelis((List<PeliGeneros>) this.buscarGeneroXId(u.getEmail()));
+            u.setGenerosPelis((List<Genero>) this.buscarGeneroXId(u.getEmail()));
             u.setPelisFavoritas((List<Favorito>) this.buscarFavoritosXId(u.getEmail()));
             usuarios.add(u);
         }
@@ -111,13 +111,13 @@ public class DataController {
         model.setFavoritos(favoritos);
     }
     public void serializarPeligenero(JSONObject jsonObject) throws JSONException {
-        List<PeliGeneros> generos= new ArrayList<>();
+        List<Genero> generos= new ArrayList<>();
         JSONArray jsonArray= jsonObject.getJSONArray("myArrayList");
         for(int i=0; i< jsonArray.length();i++){
             JSONObject car= jsonArray.getJSONObject(i);
             String usuario= car.getString("usuario");
             String pelicula= car.getString("pelicula");
-            PeliGeneros genero= new PeliGeneros(usuario,pelicula);
+            Genero genero= new Genero(usuario,pelicula);
             generos.add(genero);
         }
         model.setGeneros(generos);
