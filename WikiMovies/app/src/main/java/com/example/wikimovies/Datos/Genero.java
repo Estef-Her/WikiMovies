@@ -1,13 +1,13 @@
 package com.example.wikimovies.Datos;
 
-public class PeliGeneros {
+public class Genero {
     String usuario;
     String descripcion;
 
-    public PeliGeneros() {
+    public Genero() {
     }
 
-    public PeliGeneros(String usuario, String descripcion) {
+    public Genero(String usuario, String descripcion) {
         this.usuario = usuario;
         this.descripcion = descripcion;
     }

@@ -89,8 +89,12 @@
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 app:srcCompat="@drawable/poster6" />
         </TableRow>
+
     </TableLayout>
 
 </ScrollView>
+
+
+
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 package com.example.wikimovies.Model;
 
 import com.example.wikimovies.Datos.Favorito;
-import com.example.wikimovies.Datos.PeliGeneros;
+import com.example.wikimovies.Datos.Genero;
 import com.example.wikimovies.Datos.Usuario;
 
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ public class DatosModel {
     }
 
     private List<Favorito> favoritos= new ArrayList<>();
-    private List<PeliGeneros> generos = new ArrayList<>();
+    private List<Genero> generos = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
     private Usuario u = new Usuario();
 
 
     private Favorito currentFavorito= new Favorito();
-    private PeliGeneros currentGenero = new PeliGeneros();
+    private Genero currentGenero = new Genero();
     private Usuario currentUser = new Usuario();
     public Usuario getU() {
         return u;
@@ -36,11 +36,11 @@ public class DatosModel {
         this.favoritos = favoritos;
     }
 
-    public List<PeliGeneros> getGeneros() {
+    public List<Genero> getGeneros() {
         return generos;
     }
 
-    public void setGeneros(List<PeliGeneros> generos) {
+    public void setGeneros(List<Genero> generos) {
         this.generos = generos;
     }
 
@@ -52,11 +52,11 @@ public class DatosModel {
         this.currentFavorito = currentFavorito;
     }
 
-    public PeliGeneros getCurrentGenero() {
+    public Genero getCurrentGenero() {
         return currentGenero;
     }
 
-    public void setCurrentGenero(PeliGeneros currentGenero) {
+    public void setCurrentGenero(Genero currentGenero) {
         this.currentGenero = currentGenero;
     }
 
@@ -75,7 +75,7 @@ public class DatosModel {
 
 
 
-    public DatosModel(List<Favorito> fav, List<PeliGeneros> gen) {
+    public DatosModel(List<Favorito> fav, List<Genero> gen) {
         this.favoritos = fav;
         this.generos = gen;
     }

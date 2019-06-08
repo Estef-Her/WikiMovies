@@ -11,7 +11,7 @@ public class Usuario {
     int edad;
     String sexo;
     String rol;
-    List<PeliGeneros> generosPelis = new ArrayList<>();
+    List<Genero> generosPelis = new ArrayList<>();
     List<Favorito> pelisFavoritas = new ArrayList<>();
     public Usuario() {
     }
@@ -26,7 +26,7 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo, String rol, List<PeliGeneros> generosPelis, List<Favorito> pelisFavoritas) {
+    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo, String rol, List<Genero> generosPelis, List<Favorito> pelisFavoritas) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
@@ -94,11 +94,11 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public List<PeliGeneros> getGenerosPelis() {
+    public List<Genero> getGenerosPelis() {
         return generosPelis;
     }
 
-    public void setGenerosPelis(List<PeliGeneros> generosPelis) {
+    public void setGenerosPelis(List<Genero> generosPelis) {
         this.generosPelis = generosPelis;
     }
 

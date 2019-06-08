@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wikimovies.Datos.PeliGeneros;
+import com.example.wikimovies.Datos.Genero;
 import com.example.wikimovies.R;
 
 import java.util.List;
@@ -35,6 +35,7 @@ public class addGeneros extends AppCompatActivity {
         });
         if(existeUsuario){
             for(PeliGeneros p : USER.getGenerosPelis()) {
+
                 seleccionados.add(p.getDescripcion());
             }
             preperarCheck();

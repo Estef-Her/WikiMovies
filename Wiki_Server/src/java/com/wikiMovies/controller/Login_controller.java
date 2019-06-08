@@ -6,6 +6,7 @@
 package com.wikiMovies.controller;
 
 import com.google.gson.Gson;
+import com.wikiMovies.Model.Usuario_Model;
 import com.wikiMovies.domain.Usuario;
 import com.wikiMovies.services.Servicio_Usuario;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class Login_controller extends HttpServlet {
             u.setPassword((String) request.getParameter("key"));            
             Gson g = new Gson(); 
             PrintWriter out = response.getWriter();
-            data = g.toJson(Servicio_Usuario.instance().doLogin(u));
+            data = g.toJson(Usuario_Model.instance().doLogin(u));
             if(data != null){
             String user = g.toJson(u);
             out.write(user);

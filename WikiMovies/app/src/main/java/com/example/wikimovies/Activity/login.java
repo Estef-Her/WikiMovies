@@ -86,7 +86,6 @@ public class login extends AppCompatActivity implements LoaderManager.LoaderCall
         lblGotoRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 Intent a = new Intent(login.this, registro.class);
                 startActivity(a);
             }
