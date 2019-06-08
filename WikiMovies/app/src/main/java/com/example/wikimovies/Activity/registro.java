@@ -14,7 +14,7 @@ import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
 
 import static com.example.wikimovies.Activity.MainActivity.DATOS;
-import static com.example.wikimovies.Activity.MainActivity.USUARIO;
+import static com.example.wikimovies.Activity.login.USER;
 
 public class registro extends AppCompatActivity {
     String nombre ;
@@ -73,7 +73,7 @@ public class registro extends AppCompatActivity {
         }else{
             Usuario user= new Usuario(nombre,apellidos,password,email,edad,sexo,"");
             DATOS.agregarUsuarioQuemado(user);
-            USUARIO=user;
+            USER=user;
             Toast.makeText(this,"Persona Creada!",Toast.LENGTH_LONG).show();
             Intent a = new Intent(registro.this, addGeneros.class);
             startActivity(a);

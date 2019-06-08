@@ -21,12 +21,13 @@ import com.example.wikimovies.Datos.Usuario;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
+import static com.example.wikimovies.Activity.login.USER;
+import static com.example.wikimovies.Activity.login.existeUsuario;
 import com.example.wikimovies.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final Modelo DATOS= new Modelo();
-    public static Usuario USUARIO;
-    public static boolean existeUsuario=false;
+
     CarouselView carouselView;
 
     int[] sampleImages = {R.drawable.poster1, R.drawable.poster2, R.drawable.poster3};
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     void logout(){
           finish();
           Intent a = new Intent(this,MainActivity.class);
-          USUARIO=new Usuario();
+          USER=new Usuario();
           existeUsuario=false;
           startActivity(a);
     }

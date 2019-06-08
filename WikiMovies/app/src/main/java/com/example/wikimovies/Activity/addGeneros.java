@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import static com.example.wikimovies.Activity.MainActivity.DATOS;
-import static com.example.wikimovies.Activity.MainActivity.USUARIO;
-import static com.example.wikimovies.Activity.MainActivity.existeUsuario;
+import static com.example.wikimovies.Activity.login.USER;
+import static com.example.wikimovies.Activity.login.existeUsuario;
 
 public class addGeneros extends AppCompatActivity {
     List<String> seleccionados= new ArrayList<>();
@@ -34,7 +34,7 @@ public class addGeneros extends AppCompatActivity {
                 listo();}
         });
         if(existeUsuario){
-            for(PeliGeneros p : USUARIO.getGenerosPelis()) {
+            for(PeliGeneros p : USER.getGenerosPelis()) {
                 seleccionados.add(p.getDescripcion());
             }
             preperarCheck();
@@ -109,7 +109,7 @@ public class addGeneros extends AppCompatActivity {
     }
     public void listo(){
         for (String s: seleccionados) {
-            DATOS.addGenerosQuemados(USUARIO.getEmail(),s);
+            DATOS.addGenerosQuemados(USER.getEmail(),s);
             Toast.makeText(this,"Añadido",Toast.LENGTH_LONG).show();
         }
         finish();

@@ -4,7 +4,8 @@ import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.Model.LoginModel;
 
 import org.json.JSONObject;
-
+import static com.example.wikimovies.Activity.login.USER;
+import static com.example.wikimovies.Activity.login.existeUsuario;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,8 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginController {
-    String host="192.168.50.23";
-    String puerto="30503";
+    String host="10.251.32.96";
+    String puerto="8080";
     private LoginModel model = new LoginModel();
     private static final LoginController ourInstance = new LoginController();
 
@@ -81,20 +82,8 @@ public class LoginController {
                 usuario.setRol(rol);
                 usuario.setEmail(email);
                 usuario.setPassword(clave);
-                switch (usuario.getRol()){
-                    case "Administrador":
-                       // Administrador_Controller.instance().cargar(model.getUser().getUsername(),model.getUser().getClave());
-                        res= true;
-                        break;
-                    case "User":
-                       // Alumno_Controller.instance().cargar(model.getUser().getUsername(),model.getUser().getClave());
-                        res= true;
-                        break;
-                    default:break;
-                }
-
-
-
+                USER =usuario;
+                existeUsuario=true;
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

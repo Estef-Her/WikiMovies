@@ -34,16 +34,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.example.wikimovies.Controller.DataController;
 import com.example.wikimovies.Controller.LoginController;
+import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
-
+import com.example.wikimovies.Datos.Modelo;
+import com.example.wikimovies.Datos.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static com.example.wikimovies.Activity.MainActivity.existeUsuario;
+
 
 public class login extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
    // private TextView lblGotoRegister;
+    public static Usuario USER;
+    public static boolean existeUsuario=false;
+
 
     private Button btnLogin;
     private UserLoginTask mAuthTask= null;
