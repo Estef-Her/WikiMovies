@@ -5,14 +5,16 @@
  */
 package com.wikiMovies.controller;
 
+import AccesoADatos.GlobalException;
+import AccesoADatos.NoDataException;
+import Dao.ServicioBusquedas;
+import Dao.ServicioFavoritos;
+import Entities.Favorito;
+import Entities.Usuario;
 import com.google.gson.Gson;
-import com.wikiMovies.domain.Favoritos;
-import com.wikiMovies.domain.FavoritosId;
-import com.wikiMovies.domain.Usuario;
-import com.wikiMovies.services.Service;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -41,7 +43,7 @@ public class Favoritos_controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
+         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, Exception {
         switch(request.getServletPath()){
             case "/createFavorito":
                 this.doCreate(request,response);
@@ -93,6 +95,8 @@ public class Favoritos_controller extends HttpServlet {
           Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IllegalAccessException ex) {
           Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (Exception ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
 
@@ -115,6 +119,8 @@ public class Favoritos_controller extends HttpServlet {
           Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IllegalAccessException ex) {
           Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (Exception ex) {
+          Logger.getLogger(Favoritos_controller.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
 
@@ -128,44 +134,41 @@ public class Favoritos_controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
         Usuario aux = new Usuario();
         aux.setEmail(email);
         String pelicula = (String)request.getParameter("pelicula");
-        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
-        FavoritosId favId = new FavoritosId(email,pelicula);
-        Favoritos fav = new Favoritos(favId,aux,puntuacion);
-        Service.instance().getServicio_Favoritos().add(fav);
+        Double puntuacion = Double.valueOf(request.getParameter("puntuacion"));                  
+        ServicioFavoritos.instance().crearFavorito(aux, pelicula, puntuacion);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, NoDataException, InstantiationException, IllegalAccessException, Exception {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
         Usuario aux = new Usuario();
         aux.setEmail(email);
         String pelicula = (String)request.getParameter("pelicula");
-        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
-        FavoritosId favId = new FavoritosId(email,pelicula);
-        Favoritos fav = new Favoritos(favId,aux,puntuacion);
-        Service.instance().getServicio_Favoritos().merge(fav);
+        Double puntuacion = Double.valueOf(request.getParameter("puntuacion"));                  
+        ServicioFavoritos.instance().modificarFavorito(aux, pelicula, puntuacion);      
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
 
   @SuppressWarnings("empty-statement")
-    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
        PrintWriter out = response.getWriter();
        Gson gson = new Gson(); 
-       ArrayList<Favoritos> favoritos =  (ArrayList<Favoritos>) Service.instance().getServicio_Favoritos().findAll();       
+       String email = (String)request.getParameter("email");
+       ArrayList<Favorito> favoritos =  (ArrayList<Favorito>) ServicioBusquedas.instance().verFavoritosXusuario(email);       
         while(favoritos.remove(null));
         JSONArray jsArray = new JSONArray();
-        for(Favoritos c: favoritos){
+        for(Favorito c: favoritos){
            jsArray.put(c);
         }
         String favs = gson.toJson(jsArray);
@@ -173,31 +176,27 @@ public class Favoritos_controller extends HttpServlet {
     }
 
   @SuppressWarnings("empty-statement")
-    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Gson gson = new Gson(); 
-        String email = (String)request.getParameter("email");         
-        ArrayList<Favoritos> favoritos =  (ArrayList<Favoritos>) Service.instance().getServicio_Favoritos().findByEmail(email);;       
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
+       PrintWriter out = response.getWriter();
+       Gson gson = new Gson(); 
+       String email = (String)request.getParameter("email");
+       ArrayList<Favorito> favoritos =  (ArrayList<Favorito>) ServicioBusquedas.instance().verFavoritosXusuario(email);       
         while(favoritos.remove(null));
         JSONArray jsArray = new JSONArray();
-        for(Favoritos c: favoritos){
+        for(Favorito c: favoritos){
            jsArray.put(c);
         }
         String favs = gson.toJson(jsArray);
         out.write(favs);
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
         Usuario aux = new Usuario();
-        aux.setEmail(email);
-        String pelicula = (String)request.getParameter("pelicula");
-        BigDecimal puntuacion = BigDecimal.valueOf(Double.valueOf(request.getParameter("puntuacion")));       
-        FavoritosId favId = new FavoritosId(email,pelicula);
-        Favoritos fav = new Favoritos(favId,aux,puntuacion);
-        Service.instance().getServicio_Favoritos().delete(fav);
+        aux.setEmail(email);  
+        ServicioFavoritos.instance().eliminarFavorito(email);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }

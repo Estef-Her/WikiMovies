@@ -34,7 +34,7 @@ public class addGeneros extends AppCompatActivity {
                 listo();}
         });
         if(existeUsuario){
-            for(PeliGeneros p : USER.getGenerosPelis()) {
+            for(Genero p : USER.getGenerosPelis()) {
 
                 seleccionados.add(p.getDescripcion());
             }

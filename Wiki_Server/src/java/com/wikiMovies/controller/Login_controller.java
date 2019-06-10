@@ -5,10 +5,10 @@
  */
 package com.wikiMovies.controller;
 
+import Dao.Service;
+import Dao.ServicioUsuario;
+import Entities.Usuario;
 import com.google.gson.Gson;
-import com.wikiMovies.Model.Usuario_Model;
-import com.wikiMovies.domain.Usuario;
-import com.wikiMovies.services.Servicio_Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -109,26 +109,21 @@ public class Login_controller extends HttpServlet {
     }// </editor-fold>
 
     private void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            String data;
+        try{           
             Usuario u = new Usuario();
             u.setEmail((String) request.getParameter("email"));
             u.setPassword((String) request.getParameter("key"));            
             Gson g = new Gson(); 
-            PrintWriter out = response.getWriter();
-            data = g.toJson(Usuario_Model.instance().doLogin(u));
-            if(data != null){
+            PrintWriter out = response.getWriter();           
+            if(Service.instance().doLogin(u.getEmail(),u.getPassword())){
+            u = ServicioUsuario.instance().cargarPerfil(u.getEmail(), u.getPassword());
             String user = g.toJson(u);
-            out.write(user);
+            out.write(user);          
             response.setStatus(200);
             }else{
             response.sendError(2);
             }
-            try {
-            out.println(data);
-        } finally {
-            out.close();
-        }
+           
         }
         catch(Exception e){
             response.setStatus(400); // faild    

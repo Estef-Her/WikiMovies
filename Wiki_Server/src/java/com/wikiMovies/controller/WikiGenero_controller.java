@@ -5,11 +5,13 @@
  */
 package com.wikiMovies.controller;
 
+import AccesoADatos.GlobalException;
+import AccesoADatos.NoDataException;
+import Dao.ServicioBusquedas;
+import Dao.ServicioWikiGeneros;
+import Entities.Usuario;
+import Entities.WikiGenero;
 import com.google.gson.Gson;
-import com.wikiMovies.domain.Usuario;
-import com.wikiMovies.domain.WikiGeneros;
-import com.wikiMovies.domain.WikiGenerosId;
-import com.wikiMovies.services.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,7 +42,7 @@ public class WikiGenero_controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
+         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, GlobalException, NoDataException, Exception {
         switch(request.getServletPath()){
             case "/createWiki":
                 this.doCreate(request,response);
@@ -92,6 +94,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
         Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (NoDataException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
@@ -114,6 +120,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
         Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (NoDataException ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+        Logger.getLogger(WikiGenero_controller.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
@@ -127,73 +137,67 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
-        Usuario aux = new Usuario();
-        aux.setEmail(email);
+        Usuario u = new Usuario();
+        u.setEmail(email);
         String descripcion = (String)request.getParameter("descrip");        
-        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
-        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
-        Service.instance().getServicio_WikiGeneros().add(wiki);
+        ServicioWikiGeneros.instance().crearGenero(u, descripcion);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Gson gson = new Gson();
-        String email = (String)request.getParameter("email");
-        Usuario aux = new Usuario();
-        aux.setEmail(email);
-        String descripcion = (String)request.getParameter("descrip");        
-        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
-        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
-        Service.instance().getServicio_WikiGeneros().merge(wiki);
-        boolean respuesta=true;
-        out.write(gson.toJson(respuesta));
-    }
-
-@SuppressWarnings("empty-statement")
-    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Gson gson = new Gson();        
-        ArrayList<WikiGeneros> generos =  (ArrayList<WikiGeneros>)  Service.instance().getServicio_WikiGeneros().findAll();;       
-        while(generos.remove(null));
-        JSONArray jsArray = new JSONArray();
-        for(WikiGeneros c: generos){
-           jsArray.put(c);
-        }
-        String generes = gson.toJson(jsArray);
-        out.write(generes);
-    }
-
-@SuppressWarnings("empty-statement")
-    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, NoDataException, InstantiationException, IllegalAccessException, Exception {
          PrintWriter out = response.getWriter();
-         Gson gson = new Gson(); 
-         String email = (String)request.getParameter("email");        
-        ArrayList<WikiGeneros> generos =  (ArrayList<WikiGeneros>)  Service.instance().getServicio_WikiGeneros().findByEmail(email);       
+        Gson gson = new Gson();
+        String email = (String)request.getParameter("email");
+        Usuario u = new Usuario();
+        u.setEmail(email);
+        String descripcion = (String)request.getParameter("descrip");        
+        ServicioWikiGeneros.instance().modificarGenero(u, descripcion);
+        boolean respuesta=true;
+        out.write(gson.toJson(respuesta));
+    }
+
+@SuppressWarnings("empty-statement")
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson(); 
+        String email = (String)request.getParameter("email");
+        ArrayList<WikiGenero> generos =  (ArrayList<WikiGenero>)  ServicioBusquedas.instance().verGenerosXusuario(email);       
         while(generos.remove(null));
         JSONArray jsArray = new JSONArray();
-        for(WikiGeneros c: generos){
+        for(WikiGenero c: generos){
            jsArray.put(c);
         }
         String generes = gson.toJson(jsArray);
         out.write(generes);
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+@SuppressWarnings("empty-statement")
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
+         PrintWriter out = response.getWriter();
+        Gson gson = new Gson(); 
+        String email = (String)request.getParameter("email");
+        ArrayList<WikiGenero> generos =  (ArrayList<WikiGenero>)  ServicioBusquedas.instance().verGenerosXusuario(email);       
+        while(generos.remove(null));
+        JSONArray jsArray = new JSONArray();
+        for(WikiGenero c: generos){
+           jsArray.put(c);
+        }
+        String generes = gson.toJson(jsArray);
+        out.write(generes);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
         Usuario aux = new Usuario();
         aux.setEmail(email);
-        String descripcion = (String)request.getParameter("descrip");        
-        WikiGenerosId wikiId = new WikiGenerosId(email,descripcion);
-        WikiGeneros wiki = new WikiGeneros(wikiId,aux);
-        Service.instance().getServicio_WikiGeneros().delete(wiki);
+        ServicioWikiGeneros.instance().eliminarGenero(email);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }

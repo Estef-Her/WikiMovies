@@ -24,7 +24,7 @@ Create table Wiki_Genero(
 Create table Favorito(
     usuario varchar(50) not null,
     pelicula varchar(80) not null,
-    puntuacion number,
+    puntuacion float,
     constraint pkFavorito primary key(usuario,pelicula),
 	constraint fkFavorito foreign key (usuario) references Usuario(email)
 );
@@ -96,18 +96,18 @@ CREATE OR REPLACE PROCEDURE eliminarGenero(xemail in VARCHAR)
     /		
 	
 	
-CREATE OR REPLACE PROCEDURE crearFavorito(xemail in VARCHAR, xpelicula in VARCHAR)
+CREATE OR REPLACE PROCEDURE crearFavorito(xemail in VARCHAR, xpelicula in VARCHAR, xpuntuacion in float)
     IS
     BEGIN
-        INSERT into Favorito (usuario,pelicula) VALUES(xemail,xpelicula); 
+        INSERT into Favorito (usuario,pelicula,puntuacion) VALUES(xemail,xpelicula,xpuntuacion); 
         COMMIT;
     END;
     /	
 	
-CREATE OR REPLACE PROCEDURE modificarFavorito(xemail in VARCHAR, xpelicula in VARCHAR)
+CREATE OR REPLACE PROCEDURE modificarFavorito(xemail in VARCHAR, xpelicula in VARCHAR, xpuntuacion in float)
     IS
     BEGIN
-        UPDATE Favorito SET pelicula = xpelicula WHERE usuario =  xemail; 
+        UPDATE Favorito SET pelicula = xpelicula, puntuacion = xpuntuacion WHERE usuario =  xemail; 
         COMMIT;
     END;
     /	
@@ -149,4 +149,17 @@ CREATE OR REPLACE FUNCTION login(xemail IN Usuario.email%TYPE, xpassword IN Usua
         RETURN c; 
     END;
     /
+	
+	CREATE OR REPLACE FUNCTION getPerfil(xemail IN Usuario.email%TYPE, xpassword IN Usuario.password%TYPE)
+		RETURN SYS_REFCURSOR 
+		AS 
+				c SYS_REFCURSOR; 
+		BEGIN 
+		OPEN c FOR 
+			SELECT * FROM Usuario WHERE email = xemail AND password = xpassword;
+			RETURN c; 
+		END;
+		/
+
+	
 commit;

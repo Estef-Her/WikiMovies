@@ -5,14 +5,15 @@
  */
 package com.wikiMovies.controller;
 
+import AccesoADatos.GlobalException;
+import AccesoADatos.NoDataException;
+import Dao.ServicioUsuario;
+import Entities.Usuario;
 import com.google.gson.Gson;
-import com.wikiMovies.domain.Usuario;
-import com.wikiMovies.services.Service;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,7 +21,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
 
 /**
  *
@@ -41,7 +41,7 @@ public class Usuario_controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException {
+         throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, GlobalException, NoDataException {
         switch(request.getServletPath()){
             case "/createUser":
                 this.doCreate(request,response);
@@ -50,7 +50,7 @@ public class Usuario_controller extends HttpServlet {
                 this.doUpdate(request,response);
                 break;
             case "/findAllUser":
-                this.getAll(request,response);
+                //this.getAll(request,response);
                 break;
             case "/finUserByID":
                 this.getByID(request,response);
@@ -93,6 +93,10 @@ public class Usuario_controller extends HttpServlet {
            Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
            Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (GlobalException ex) {
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (NoDataException ex) {
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 
@@ -115,6 +119,10 @@ public class Usuario_controller extends HttpServlet {
            Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        } catch (IllegalAccessException ex) {
            Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (GlobalException ex) {
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (NoDataException ex) {
+           Logger.getLogger(Usuario_controller.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
 
@@ -128,43 +136,41 @@ public class Usuario_controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String nombre = (String)request.getParameter("nombre");
         String apellidos = (String)request.getParameter("apellidos");
-        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
+        int edad = Integer.valueOf(request.getParameter("edad"));
         String sexo = (String)request.getParameter("sexo");
         String password = (String)request.getParameter("key");
         String email = (String)request.getParameter("email");
         String rol = (String)request.getParameter("rol");
-        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
-        Service.instance().getServicio_Usuario().add(u);
+        ServicioUsuario.instance().crearUsuario(nombre, apellidos, edad, sexo, password, email, rol);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
 
-    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, SQLException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
-        String nombre = (String)request.getParameter("nombre");
+         String nombre = (String)request.getParameter("nombre");
         String apellidos = (String)request.getParameter("apellidos");
-        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
+        int edad = Integer.valueOf(request.getParameter("edad"));
         String sexo = (String)request.getParameter("sexo");
         String password = (String)request.getParameter("key");
         String email = (String)request.getParameter("email");
         String rol = (String)request.getParameter("rol");
-        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
-        Service.instance().getServicio_Usuario().merge(u);
+        ServicioUsuario.instance().modificarCurso(nombre, apellidos, edad, sexo, password, email, rol);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
 
-   @SuppressWarnings("empty-statement")
+  /* @SuppressWarnings("empty-statement")
     private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();        
-        ArrayList<Usuario> users =  (ArrayList<Usuario>)   Service.instance().getServicio_Usuario().findAll();       
+        ArrayList<Usuario> users =  (ArrayList<Usuario>)  ServicioBusquedas;       
         while(users.remove(null));
         JSONArray jsArray = new JSONArray();
         for(Usuario c: users){
@@ -172,29 +178,22 @@ public class Usuario_controller extends HttpServlet {
         }
         String us = gson.toJson(jsArray);
         out.write(us);
-    }
+    }*/
 
-    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException, InstantiationException, GlobalException, NoDataException, IllegalAccessException {
        PrintWriter out = response.getWriter(); 
        Gson gson = new Gson(); 
        String email = (String)request.getParameter("email");       
-       Usuario u =  (Usuario)Service.instance().getServicio_Usuario().findByEmail(email);               
+       Usuario u =  (Usuario)ServicioUsuario.instance().cargarPerfil(email, email);               
        String us = gson.toJson(u);
        out.write(us);
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
         PrintWriter out = response.getWriter();
-        Gson gson = new Gson();
-        String nombre = (String)request.getParameter("nombre");
-        String apellidos = (String)request.getParameter("apellidos");
-        BigDecimal edad = BigDecimal.valueOf(Double.valueOf(request.getParameter("edad")));
-        String sexo = (String)request.getParameter("sexo");
-        String password = (String)request.getParameter("key");
-        String email = (String)request.getParameter("email");
-        String rol = (String)request.getParameter("rol");
-        Usuario u = new Usuario( email,  nombre,  apellidos,  edad,  sexo,  password,  rol);
-        Service.instance().getServicio_Usuario().delete(u);
+        Gson gson = new Gson();       
+        String email = (String)request.getParameter("email");     
+        ServicioUsuario.instance().eliminarUsuario(email);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
