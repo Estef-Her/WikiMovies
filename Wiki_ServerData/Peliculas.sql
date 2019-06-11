@@ -87,10 +87,10 @@ CREATE OR REPLACE PROCEDURE modificarGenero(xemail in VARCHAR, xdescripcion in V
         COMMIT;
     END;
     /	
-CREATE OR REPLACE PROCEDURE eliminarGenero(xemail in VARCHAR)
+CREATE OR REPLACE PROCEDURE eliminarGenero(xemail in VARCHAR, xdescripcion in VARCHAR)
     IS
     BEGIN
-        DELETE Wiki_Genero  WHERE usuario =  xemail; 
+        DELETE Wiki_Genero  WHERE usuario =  xemail and descripcion = xdescripcion; 
         COMMIT;
     END;
     /		
@@ -111,10 +111,10 @@ CREATE OR REPLACE PROCEDURE modificarFavorito(xemail in VARCHAR, xpelicula in VA
         COMMIT;
     END;
     /	
-CREATE OR REPLACE PROCEDURE eliminarFavorito(xemail in VARCHAR)
+CREATE OR REPLACE PROCEDURE eliminarFavorito(xemail in VARCHAR, xpelicula in VARCHAR)
     IS
     BEGIN
-        DELETE  Favorito  WHERE usuario =  xemail; 
+        DELETE  Favorito  WHERE usuario =  xemail and pelicula = xpelicula; 
         COMMIT;
     END;
     /			
