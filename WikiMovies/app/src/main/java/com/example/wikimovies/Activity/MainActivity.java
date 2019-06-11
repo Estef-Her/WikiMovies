@@ -18,6 +18,7 @@ import android.content.Intent;
 
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Usuario;
+import com.example.wikimovies.Services.MoviesServices;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        //MoviesServices.instance().getPosts();
     }
 
 
@@ -174,4 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //  Intent a = new Intent(this, AcercaDe.class);
         //  startActivity(a);
     }
+
+
+
 }

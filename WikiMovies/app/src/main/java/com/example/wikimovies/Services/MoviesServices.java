@@ -1,6 +1,9 @@
 package com.example.wikimovies.Services;
 
 import com.example.wikimovies.Datos.Pelicula;
+import com.example.wikimovies.Utils.httpRequester;
+
+import org.apache.http.HttpRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -10,32 +13,29 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MoviesServices {
     private String apikey = "bc742fda54c5bce645dcb30e8c22f91f";
     private String link = "https://api.themoviedb.org/3";
+    ArrayList<Object> pelis = new ArrayList<>();
     private static final MoviesServices uniqueInstance = new MoviesServices();
     public static MoviesServices instance(){
         return  uniqueInstance;
     }
-    public List<Pelicula> cargarPelisNuevas() {
-        List<Pelicula> pelis = new ArrayList<>();
-        try {
-            URL url;
-            HttpURLConnection urlConnection = null;
+    public List<Object> cargarPelisNuevas() {
+
+       /* try {
+
+
+
             try {
-                url = new URL(link+"/movie/now_playing?"+"apikey="+apikey+"&language=en-US&page=1");
 
-                urlConnection = (HttpURLConnection) url
-                        .openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-                StringBuilder responseStrBuilder = new StringBuilder();
-
-                String inputStr;
-                while ((inputStr = streamReader.readLine()) != null) {
-                    responseStrBuilder.append(inputStr);
-                }
 
                 JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
@@ -82,8 +82,11 @@ public class MoviesServices {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         return  pelis;
     }
-    
+
+
+
+
 }
