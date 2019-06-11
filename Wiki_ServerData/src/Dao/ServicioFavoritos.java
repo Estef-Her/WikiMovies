@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class ServicioFavoritos extends Service{
     private static final String CREARFAVORITO= "{call crearFavorito(?,?,?}";
     private static final String MODIFICARFAVORITO= "{call modificarFavorito(?,?,?)}";
-    private static final String ELIMINARFAVORITO= "{call eliminarFavorito(?)}";
+    private static final String ELIMINARFAVORITO= "{call eliminarFavorito(?,?)}";
     private static ServicioFavoritos uniqueInstance;
     public static ServicioFavoritos instance(){
         if (uniqueInstance == null){
@@ -37,18 +37,15 @@ public class ServicioFavoritos extends Service{
        CallableStatement pstmt=null;
 
        try {
-           pstmt = conexion.prepareCall(CREARFAVORITO);
-           pstmt.setString(1,usuario.getEmail());
-           pstmt.setString(2,pelicula);
-           pstmt.setDouble(3,puntuacion);          
+           String sql = "INSERT INTO Favorito VALUES("+"'"+usuario.getEmail()+"',"+"'"+pelicula+"',"+puntuacion+")";
+           pstmt = conexion.prepareCall(sql);            
            boolean resultado = pstmt.execute();
            if (resultado == true) {
                throw new AccesoADatos.NoDataException("No se realizo la insercion");
            }
 
        } catch (SQLException e) {
-           e.printStackTrace();
-           throw new AccesoADatos.GlobalException("Llave duplicada");
+           throw new AccesoADatos.GlobalException(e.getMessage());
        } finally {
            try {
                if (pstmt != null) {
@@ -56,7 +53,7 @@ public class ServicioFavoritos extends Service{
                }
                desconectar();
            } catch (SQLException e) {
-               throw new AccesoADatos.GlobalException("Estatutos invalidos o nulos");
+               throw new AccesoADatos.GlobalException(e.getMessage());
            }
        }
    }     
@@ -72,10 +69,8 @@ public class ServicioFavoritos extends Service{
        CallableStatement pstmt=null;
        
        try {
-           pstmt = conexion.prepareCall(MODIFICARFAVORITO);
-           pstmt.setString(1,usuario.getEmail());
-           pstmt.setString(2,pelicula);
-           pstmt.setDouble(3,puntuacion);
+           String sql = "UPDATE Favorito SET pelicula = '"+pelicula+"',puntuacion = "+puntuacion+" WHERE usuario =  '"+usuario.getEmail()+"'; ";
+           pstmt = conexion.prepareCall(sql);         
            int count = pstmt.executeUpdate();
            if (count < 0){
                throw new AccesoADatos.GlobalException("Error al actualizar informacion del alumno");
@@ -94,7 +89,7 @@ public class ServicioFavoritos extends Service{
            }
        }
    }      
-    public void eliminarFavorito(String email) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
+    public void eliminarFavorito(String email, String pelicula) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
        try {
            conectar();
        } catch (ClassNotFoundException e) {
@@ -107,13 +102,15 @@ public class ServicioFavoritos extends Service{
        try {
            pstmt = conexion.prepareCall(ELIMINARFAVORITO);
            pstmt.setString(1,email);
+            pstmt.setString(2,pelicula);
            boolean resultado = pstmt.execute();
+      
            if (resultado == true) {
                throw new AccesoADatos.NoDataException("No se realizo la inserci�n");
            }
 
        } catch (SQLException e) {
-           throw new AccesoADatos.GlobalException("Llave duplicada");
+           throw new AccesoADatos.GlobalException(e.getMessage());
        } finally {
            try {
                if (pstmt != null) {
@@ -121,7 +118,7 @@ public class ServicioFavoritos extends Service{
                }
                desconectar();
            } catch (SQLException e) {
-               throw new AccesoADatos.GlobalException("Estatutos invalidos o nulos");
+               throw new AccesoADatos.GlobalException(e.getMessage());
            }
        }
    }      

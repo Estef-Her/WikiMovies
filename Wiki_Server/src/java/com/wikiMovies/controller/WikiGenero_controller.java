@@ -195,9 +195,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
+         String descripcion = (String)request.getParameter("descrip");      
         Usuario aux = new Usuario();
         aux.setEmail(email);
-        ServicioWikiGeneros.instance().eliminarGenero(email);
+        ServicioWikiGeneros.instance().eliminarGenero(email,descripcion);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }

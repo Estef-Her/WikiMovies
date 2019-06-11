@@ -1,12 +1,14 @@
 package com.example.wikimovies.Datos;
 
+import java.util.List;
+
 public class Pelicula {
 
     String  adult;
     String  backdrop_path;
     String  belongs_to_collection;
     String  budget;
-    String  genres;
+    List<Integer> genre_ids;
     String  homepage;
     String  imdb_id;
     String  original_language;
@@ -30,12 +32,12 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(String adult, String backdrop_path, String belongs_to_collection, String budget, String genres, String homepage, String imdb_id, String original_language, String original_title, String overview, String popularity, String poster_path, String production_companies, String production_countries, String release_date, String revenue, String runtime, String spoken_languages, String status, String tagline, String title, String video, String vote_average, String vote_count) {
+    public Pelicula(String adult, String backdrop_path, String belongs_to_collection, String budget, List<Integer> genre_ids, String homepage, String imdb_id, String original_language, String original_title, String overview, String popularity, String poster_path, String production_companies, String production_countries, String release_date, String revenue, String runtime, String spoken_languages, String status, String tagline, String title, String video, String vote_average, String vote_count) {
         this.adult = adult;
         this.backdrop_path = backdrop_path;
         this.belongs_to_collection = belongs_to_collection;
         this.budget = budget;
-        this.genres = genres;
+        this.genre_ids = genre_ids;
         this.homepage = homepage;
         this.imdb_id = imdb_id;
         this.original_language = original_language;
@@ -89,12 +91,12 @@ public class Pelicula {
         this.budget = budget;
     }
 
-    public String getGenres() {
-        return genres;
+    public List<Integer> getGenre_ids() {
+        return genre_ids;
     }
 
-    public void setGenres(String genres) {
-        this.genres = genres;
+    public void setGenre_ids(List<Integer> genre_ids) {
+        this.genre_ids = genre_ids;
     }
 
     public String getHomepage() {

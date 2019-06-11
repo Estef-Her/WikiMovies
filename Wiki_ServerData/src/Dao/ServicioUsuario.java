@@ -140,7 +140,7 @@ public class ServicioUsuario extends Service {
    }       
     
   
-    public Usuario cargarPerfil(String user, String password) throws InstantiationException, GlobalException, NoDataException, IllegalAccessException{
+    public Usuario cargarPerfil(String email) throws InstantiationException, GlobalException, NoDataException, IllegalAccessException{
         Usuario u = new Usuario();
         ArrayList<Usuario> aux = new ArrayList();
         try {
@@ -152,10 +152,8 @@ public class ServicioUsuario extends Service {
         }
         CallableStatement pstmt=null;
         try {
-            pstmt = conexion.prepareCall(CARGARPERFIL);
-            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            pstmt.setString(2,user);
-            pstmt.setString(3,password);
+            String sql = "SELECT * FROM Usuario WHERE email = '"+email+"';";
+            pstmt = conexion.prepareCall(sql);      
             pstmt.execute();                            
             ResultSet rs = (ResultSet) pstmt.getObject(1); 
             while(rs.next()){

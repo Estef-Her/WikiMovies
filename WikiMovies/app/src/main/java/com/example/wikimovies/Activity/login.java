@@ -32,12 +32,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.wikimovies.Controller.DataController;
 import com.example.wikimovies.Controller.LoginController;
 import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Usuario;
+import com.example.wikimovies.Services.MoviesServices;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +83,12 @@ public class login extends AppCompatActivity implements LoaderManager.LoaderCall
                 return false;
             }
         });
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);int n = MoviesServices.instance().cargarPelisNuevas().size();
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Bienvenido",
+                Toast.LENGTH_SHORT);
+
+        toast.show();
         loginErrorMsg = findViewById(R.id.login_error);
 
         Button lblGotoRegister  = findViewById(R.id.btnRegistro);

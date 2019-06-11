@@ -53,7 +53,7 @@ public class Usuario_controller extends HttpServlet {
                 //this.getAll(request,response);
                 break;
             case "/finUserByID":
-                this.getByID(request,response);
+                this.getByEmail(request,response);
                 break;    
             case "/deleteUser": 
                 this.delete(request,response);
@@ -180,11 +180,11 @@ public class Usuario_controller extends HttpServlet {
         out.write(us);
     }*/
 
-    private void getByID(HttpServletRequest request, HttpServletResponse response) throws IOException, InstantiationException, GlobalException, NoDataException, IllegalAccessException {
+    private void getByEmail(HttpServletRequest request, HttpServletResponse response) throws IOException, InstantiationException, GlobalException, NoDataException, IllegalAccessException {
        PrintWriter out = response.getWriter(); 
        Gson gson = new Gson(); 
        String email = (String)request.getParameter("email");       
-       Usuario u =  (Usuario)ServicioUsuario.instance().cargarPerfil(email, email);               
+       Usuario u =  (Usuario)ServicioUsuario.instance().cargarPerfil(email);               
        String us = gson.toJson(u);
        out.write(us);
     }

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class ServicioWikiGeneros extends Service{
     private static final String CREARGENERO= "{call crearGenero(?,?}";
     private static final String MODIFICARGENERO= "{call modificarGenero(?,?)}";
-    private static final String ELIMINARGENERO= "{call eliminarGenero(?)}";
+    private static final String ELIMINARGENERO= "{call eliminarGenero(?,?)}";
     private static ServicioWikiGeneros uniqueInstance;
     public static ServicioWikiGeneros instance(){
         if (uniqueInstance == null){
@@ -37,9 +37,8 @@ public class ServicioWikiGeneros extends Service{
        CallableStatement pstmt=null;
 
        try {
-           pstmt = conexion.prepareCall(CREARGENERO);
-           pstmt.setString(1,usuario.getEmail());
-           pstmt.setString(2,descripcion);
+           String sql = "INSERT INTO Wiki_Genero VALUES('"+usuario.getEmail()+"',"+"'"+descripcion+"')";
+           pstmt = conexion.prepareCall(sql);   
 
           
            boolean resultado = pstmt.execute();
@@ -73,10 +72,9 @@ public class ServicioWikiGeneros extends Service{
        CallableStatement pstmt=null;
        
        try {
-           pstmt = conexion.prepareCall(MODIFICARGENERO);
-           pstmt.setString(1,usuario.getEmail());
-           pstmt.setString(2,descripcion);
-           int count = pstmt.executeUpdate();
+           String sql = "UPDATE Wiki_Genero SET descripcion = '"+descripcion+"' WHERE usuario =  '"+usuario.getEmail()+"'; ";
+           pstmt = conexion.prepareCall(sql);         
+           int count = pstmt.executeUpdate();       
            if (count < 0){
                throw new AccesoADatos.GlobalException("Error al actualizar informacion del alumno");
            }
@@ -94,7 +92,7 @@ public class ServicioWikiGeneros extends Service{
            }
        }
    }      
-    public void eliminarGenero(String email) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
+    public void eliminarGenero(String email, String descripcion) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
        try {
            conectar();
        } catch (ClassNotFoundException e) {
@@ -107,6 +105,7 @@ public class ServicioWikiGeneros extends Service{
        try {
            pstmt = conexion.prepareCall(ELIMINARGENERO);
            pstmt.setString(1,email);
+           pstmt.setString(2,descripcion);       
            boolean resultado = pstmt.execute();
            if (resultado == true) {
                throw new AccesoADatos.NoDataException("No se realizo la inserci�n");

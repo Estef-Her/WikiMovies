@@ -30,10 +30,12 @@ public class ServicioBusquedas extends Service{
          
     public Favorito tipoFavorito(ResultSet rs){
         try{
+            Usuario aux  = new  Usuario();
             Favorito f = new Favorito();
-            f.setPuntuacion(rs.getDouble("cedula"));
-            f.setPelicula(rs.getString("edad"));
-            f.setUsuario(tipoUsuario(rs));
+            aux.setEmail(rs.getString("usuario"));
+            f.setPuntuacion(rs.getDouble("puntuacion"));
+            f.setPelicula(rs.getString("pelicula"));
+            f.setUsuario(aux);
             return f;
         }
         catch (SQLException ex) {
@@ -42,8 +44,10 @@ public class ServicioBusquedas extends Service{
     }            
     public WikiGenero tipoWikiGenero(ResultSet rs){
         try{
+            Usuario aux  = new  Usuario();
             WikiGenero w = new WikiGenero();
-            w.setUsuario(tipoUsuario(rs));
+            aux.setEmail(rs.getString("usuario"));
+            w.setUsuario(aux);
             w.setDescripcion(rs.getString("nombre"));         
             return w;
         }

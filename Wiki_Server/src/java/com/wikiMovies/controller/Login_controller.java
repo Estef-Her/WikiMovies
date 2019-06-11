@@ -111,12 +111,11 @@ public class Login_controller extends HttpServlet {
     private void doLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{           
             Usuario u = new Usuario();
-            u.setEmail((String) request.getParameter("email"));
-            u.setPassword((String) request.getParameter("key"));            
+            u.setEmail((String) request.getParameter("email"));                   
             Gson g = new Gson(); 
             PrintWriter out = response.getWriter();           
             if(Service.instance().doLogin(u.getEmail(),u.getPassword())){
-            u = ServicioUsuario.instance().cargarPerfil(u.getEmail(), u.getPassword());
+            u = ServicioUsuario.instance().cargarPerfil(u.getEmail());
             String user = g.toJson(u);
             out.write(user);          
             response.setStatus(200);

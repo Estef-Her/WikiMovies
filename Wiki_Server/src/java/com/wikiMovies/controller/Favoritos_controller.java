@@ -194,9 +194,10 @@ public class Favoritos_controller extends HttpServlet {
         PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
+        String pelicula = (String)request.getParameter("pelicula");
         Usuario aux = new Usuario();
         aux.setEmail(email);  
-        ServicioFavoritos.instance().eliminarFavorito(email);
+        ServicioFavoritos.instance().eliminarFavorito(email,pelicula);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
