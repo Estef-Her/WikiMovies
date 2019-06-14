@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import static com.example.wikimovies.Activity.login.USER;
@@ -24,6 +25,7 @@ import static com.example.wikimovies.Activity.login.existeUsuario;
 
 public class DataController {
     private DatosModel model = new DatosModel();
+    public static String listaMovies;
     private static final DataController ourInstance = new DataController();
 
     public DataController() {
@@ -139,7 +141,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -173,7 +175,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -225,7 +227,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -263,7 +265,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -323,7 +325,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -364,7 +366,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;
@@ -409,7 +411,7 @@ public class DataController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;

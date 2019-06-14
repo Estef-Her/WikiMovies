@@ -1,9 +1,13 @@
 package com.example.wikimovies.Activity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.example.wikimovies.Controller.DataController;
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Movie;
 import com.example.wikimovies.Datos.Result;
@@ -40,38 +45,46 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final Modelo DATOS= new Modelo();
-    private List<Movie> popularMovies;
-    private List<Movie> latestMovies;
-    private List<Movie> kidMovies;
-    private List<Movie> rMovies;
-    private List<Movie> dramaMovies;
-    private List<Movie> bestMovies;
-    private List<Movie> resultados;
-    private List<Movie> actionMovies;
-    private List<Movie> adventureMovies;
-    private List<Movie> animateMovies;
-    private List<Movie> comedyMovies;
-    private List<Movie> crimeMovies;
-    private List<Movie> documentalMovies;
-    private List<Movie> famillyMovies;
-    private List<Movie> fantasyMovies;
-    private List<Movie> historyMovies;
-    private List<Movie> horrorMovies;
-    private List<Movie> rmusicMovies;
-    private List<Movie> misteryMovies;
-    private List<Movie> romanceMovies;
-    private List<Movie> sfMovies;
-    private List<Movie> tvMovies;
-    private List<Movie> thrillerMovies;
-    private List<Movie> warMovies;
-    private List<Movie> westernMovies;
+    private SectionsPageAdapter mSectionsPageAdapter;
+
+    private ViewPager mViewPager;
+    public static List<Movie> popularMovies;
+    public static List<Movie> latestMovies;
+    public static List<Movie> kidMovies;
+    public static List<Movie> rMovies;
+    public static List<Movie> dramaMovies;
+    public static List<Movie> bestMovies;
+    public static List<Movie> resultados;
+    public static List<Movie> actionMovies;
+    public static List<Movie> adventureMovies;
+    public static List<Movie> animateMovies;
+    public static List<Movie> comedyMovies;
+    public static List<Movie> crimeMovies;
+    public static List<Movie> documentalMovies;
+    public static List<Movie> famillyMovies;
+    public static List<Movie> fantasyMovies;
+    public static List<Movie> historyMovies;
+    public static List<Movie> horrorMovies;
+    public static List<Movie> rmusicMovies;
+    public static List<Movie> misteryMovies;
+    public static List<Movie> romanceMovies;
+    public static List<Movie> sfMovies;
+    public static List<Movie> tvMovies;
+    public static List<Movie> thrillerMovies;
+    public static List<Movie> warMovies;
+    public static List<Movie> westernMovies;
     String api_key = "bc742fda54c5bce645dcb30e8c22f91f";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSectionsPageAdapter= new SectionsPageAdapter(getSupportFragmentManager());
+        AppBarLayout barra= findViewById(R.id.barrTaps);
+        mViewPager= findViewById(R.id.containerTab);
+        setupViewPage(mViewPager);
 
+        TabLayout tabLayout= findViewById(R.id.tabs);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -108,8 +121,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getTVMovies();
         getWarMovies();
         getWesternMovies();
-    }
 
+        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setBackgroundColor(R.color.myorange);
+        DataController.listaMovies="Populares";
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                DataController.listaMovies=((String)((SectionsPageAdapter)mViewPager.getAdapter()).getPageTitle(i));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+    }
+    private void setupViewPage(ViewPager viewPager){
+        SectionsPageAdapter adapter= new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new busquedaMovies(), "Populares");
+        adapter.addFragment(new busquedaMovies(), "Recientes");
+        adapter.addFragment(new busquedaMovies(), "Para Niños");
+        adapter.addFragment(new busquedaMovies(), "Clasificación R");
+        adapter.addFragment(new busquedaMovies(), "Drama");
+        adapter.addFragment(new busquedaMovies(), "Mejores del año");
+        adapter.addFragment(new busquedaMovies(), "Acción");
+        adapter.addFragment(new busquedaMovies(), "Aventura");
+        adapter.addFragment(new busquedaMovies(), "Animación");
+        adapter.addFragment(new busquedaMovies(), "Comédia");
+        adapter.addFragment(new busquedaMovies(), "Crimen");
+        adapter.addFragment(new busquedaMovies(), "Docuemental");
+        adapter.addFragment(new busquedaMovies(), "Familiares");
+        adapter.addFragment(new busquedaMovies(), "Fantasía");
+        adapter.addFragment(new busquedaMovies(), "Historia");
+        adapter.addFragment(new busquedaMovies(), "Horror");
+        adapter.addFragment(new busquedaMovies(), "Musicales");
+        adapter.addFragment(new busquedaMovies(), "Misterio");
+        adapter.addFragment(new busquedaMovies(), "Romance");
+        adapter.addFragment(new busquedaMovies(), "Suspenso");
+        adapter.addFragment(new busquedaMovies(), "Peliculas de TV");
+        adapter.addFragment(new busquedaMovies(), "Thrilers");
+        adapter.addFragment(new busquedaMovies(), "Bélicas");
+        adapter.addFragment(new busquedaMovies(), "Wastern");
+        viewPager.setAdapter(adapter);
+
+    }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
@@ -160,30 +222,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void setFragment(int position){
         switch(position){
-            case 1:
-                FragmentManager fm3;
-                FragmentTransaction ft3;
-                fm3= getSupportFragmentManager();
-                ft3=fm3.beginTransaction();
-                ft3.replace(R.id.fragment_container_principal, new principal_Fragment());
-                ft3.addToBackStack(null).commit();
-                break;
-            case 2:
-                FragmentManager fm4;
-                FragmentTransaction ft4;
-                fm4= getSupportFragmentManager();
-                ft4=fm4.beginTransaction();
-                ft4.replace(R.id.fragment_container_principal, new cuenta_fragment());
-                ft4.addToBackStack(null).commit();
-                break;
-            case 3:
-                FragmentManager fm1;
-                FragmentTransaction ft1;
-                fm1= getSupportFragmentManager();
-                ft1=fm1.beginTransaction();
-                ft1.replace(R.id.fragment_container_principal, new infoPeli_fragment());
-                ft1.addToBackStack(null).commit();
-                break;
 
         }
     }

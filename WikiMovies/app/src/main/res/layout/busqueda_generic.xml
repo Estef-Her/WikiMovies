@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/busqueda"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:iconifiedByDefault="false">
+
+            <requestFocus />
+        </SearchView>
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carouselView"
+            android:layout_width="402dp"
+            android:layout_height="193dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:fillColor="#E03B31"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Resultados"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaResultados"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Populares"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaPopulares"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Mejores del año"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaBest"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Para niños"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaKids"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Acción"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaAccion"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Animación"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaAnimacion"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Aventura"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaAventura"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Bélica"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaBelica"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Cómedia"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaComedia"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Ciencia Ficción"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaCienciaF"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Crimen"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaCrimen"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Documental"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaDocumental"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Drama"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaDrama"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Familia"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaFamilia"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Fantasía"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaFantasia"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Historia"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaHistoria"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Misterio"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaMisterio"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Música"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaMusica"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Películas de TV"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaPeliculaTv"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Romance"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaRomance"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Suspenso"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaSuspenso"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Terror"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaTerror"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Western"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listaWestern"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/busqueda"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+    </LinearLayout>
+
+
+
+
+</ScrollView>
+
+

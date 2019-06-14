@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class LoginController {
     String host="192.168.50.23";
@@ -66,7 +67,7 @@ public class LoginController {
                         .openConnection();
 
                 InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                 StringBuilder responseStrBuilder= new StringBuilder();
 
                 String inputStr;

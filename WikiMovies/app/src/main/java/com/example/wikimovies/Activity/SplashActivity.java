@@ -27,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final int SPLASH_DISPLAY_LENGTH = 1200;
         final int SPLASH_DISPLAY_OFFSET = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        ;
 
         super.onCreate(savedInstanceState);
 
@@ -42,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
 
-                final LinearLayout img = (LinearLayout) SplashActivity.this.findViewById(R.id.splashscreen);
+                final LinearLayout img = SplashActivity.this.findViewById(R.id.splashscreen);
 
                 Animation fadeOut = new AlphaAnimation(1, 0);
                 fadeOut.setInterpolator(new AccelerateInterpolator());

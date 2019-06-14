@@ -35,12 +35,12 @@ public class cuenta_fragment extends Fragment {
                  Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final View root =inflater.inflate(R.layout.activity_cuenta, container, false);
-        nombre = (EditText) root.findViewById(R.id.editarNombre);
-        apellidos = (EditText) root.findViewById(R.id.editarApellidos);
-        edad = (EditText) root.findViewById(R.id.editarEdad);
-        email = (EditText) root.findViewById(R.id.editarEmail);
-        contraseñaActual=(EditText)root.findViewById(R.id.editarPassword1);
-        contraseñaNueva=(EditText)root.findViewById(R.id.editarPassword2);
+        nombre = root.findViewById(R.id.editarNombre);
+        apellidos = root.findViewById(R.id.editarApellidos);
+        edad = root.findViewById(R.id.editarEdad);
+        email = root.findViewById(R.id.editarEmail);
+        contraseñaActual= root.findViewById(R.id.editarPassword1);
+        contraseñaNueva= root.findViewById(R.id.editarPassword2);
         if (existeUsuario) {
             nombre.setText(USER.getNombre());
             apellidos.setText(USER.getApellidos());
@@ -48,11 +48,11 @@ public class cuenta_fragment extends Fragment {
             email.setText(USER.getEmail());
         }
 
-        FloatingActionButton botnEditar1 = (FloatingActionButton) root.findViewById(R.id.editarBootonEditar);
-        final FloatingActionButton botnEditar2 = (FloatingActionButton) root.findViewById(R.id.editarBootonSave1);
-        Button botnEditar3 = (Button) root.findViewById(R.id.editarBotoonChangePassword);
-        final FloatingActionButton botnEditar4 = (FloatingActionButton) root.findViewById(R.id.editarBootonSave2);
-        Button botnEditar5=(Button)root.findViewById(R.id.editarBotoonUpdateGeneros);
+        FloatingActionButton botnEditar1 = root.findViewById(R.id.editarBootonEditar);
+        final FloatingActionButton botnEditar2 = root.findViewById(R.id.editarBootonSave1);
+        Button botnEditar3 = root.findViewById(R.id.editarBotoonChangePassword);
+        final FloatingActionButton botnEditar4 = root.findViewById(R.id.editarBootonSave2);
+        Button botnEditar5= root.findViewById(R.id.editarBotoonUpdateGeneros);
 
 
         botnEditar1.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +106,7 @@ return  root;}
         Usuario usuario = new Usuario(nombre.getText().toString(),apellidos.getText().toString(),USER.getPassword(),email.getText().toString(),Integer.parseInt(edad.getText().toString()),USER.getSexo());
         boolean persona= DataController.getInstance().actualizarUsuario(usuario);
         if(persona){
-            ((TextView)root.findViewById(R.id.editarMessage1)).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.editarMessage1).setVisibility(View.VISIBLE);
             ((TextView)root.findViewById(R.id.editarMessage1)).setText("Datos Actualizados");
             ((FloatingActionButton)root.findViewById(R.id.editarBootonSave1)).hide();
         }else{
@@ -118,7 +118,7 @@ return  root;}
         Usuario persona= DATOS.cambiarCont(email.getText().toString(),contraseñaActual.getText().toString(),contraseñaNueva.getText().toString());
         if(persona!=null){
             USER=persona;
-            ((TextView)root.findViewById(R.id.editarMessage2)).setVisibility(View.VISIBLE);
+            root.findViewById(R.id.editarMessage2).setVisibility(View.VISIBLE);
             ((TextView)root.findViewById(R.id.editarMessage2)).setText("Contraseña Actualizada");
             ((FloatingActionButton)root.findViewById(R.id.editarBootonSave2)).hide();
             contraseñaActual.setEnabled(false);

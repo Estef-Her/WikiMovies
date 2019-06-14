@@ -24,7 +24,7 @@ public class principal_Fragment extends Fragment {
 
         final View root =inflater.inflate(R.layout.fragment_principal, container, false);
 
-        carouselView = (CarouselView) root.findViewById(R.id.carouselView);
+        carouselView = root.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
 
         carouselView.setImageListener(new ImageListener() {
