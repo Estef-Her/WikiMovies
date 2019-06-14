@@ -83,7 +83,7 @@ public class login extends AppCompatActivity implements LoaderManager.LoaderCall
                 return false;
             }
         });
-        btnLogin = findViewById(R.id.btnLogin);int n = MoviesServices.instance().cargarPelisNuevas().size();
+        btnLogin = findViewById(R.id.btnLogin);
 
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Bienvenido",

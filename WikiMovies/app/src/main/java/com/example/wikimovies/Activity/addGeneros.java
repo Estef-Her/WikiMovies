@@ -88,7 +88,7 @@ public class addGeneros extends AppCompatActivity {
                case "Musica":
                    ((CheckBox)findViewById(R.id.generoMusica)).setChecked(true);
                    break;
-               case "Pelicula De TV":
+               case "Movie De TV":
                    ((CheckBox)findViewById(R.id.generoPeliculaDeTv)).setChecked(true);
                    break;
                case "Romance":
@@ -235,10 +235,10 @@ public class addGeneros extends AppCompatActivity {
                 break;
             case R.id.generoPeliculaDeTv:
                 if(checked){
-                    seleccionados.add("Pelicula De TV");
+                    seleccionados.add("Movie De TV");
 
                 }else{
-                    RemoverDato("Pelicula De TV");
+                    RemoverDato("Movie De TV");
                 }
                 break;
             case R.id.generoRomance:
