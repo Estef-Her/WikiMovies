@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0FFFFFFF"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/myorange"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="WikiMovies"
+            android:gravity="center_vertical|center_horizontal"
+            app:titleMarginStart="150dp" />
+
+
+        <FrameLayout
+            android:id="@+id/fragment_container_principal"
+            android:layout_width="match_parent"
+            android:layout_height="696dp"></FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+</RelativeLayout>
