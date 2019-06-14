@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/Lavender"
     android:orientation="vertical"
-    tools:context=".Activity.cuenta">
+    tools:context=".Activity.cuenta_fragment">
 
     <ImageView
         android:id="@+id/photoPerfil"

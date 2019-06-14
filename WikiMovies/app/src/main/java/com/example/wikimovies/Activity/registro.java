@@ -71,10 +71,10 @@ public class registro extends AppCompatActivity {
         if(nombre.equals("") || apellidos.equals("") || password.equals("") || email.equals("") || edad==0){
             ((TextView)findViewById(R.id.register_error)).setText("Datos invalidos o campos vacios!");
         }else{
-            Usuario user= new Usuario(nombre,apellidos,password,email,edad,sexo,"");
+            Usuario user= new Usuario(nombre,apellidos,password,email,edad,sexo);
             DATOS.agregarUsuarioQuemado(user);
             USER=user;
-            Toast.makeText(this,"Persona Creada!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Usuario registrado!",Toast.LENGTH_LONG).show();
             Intent a = new Intent(registro.this, addGeneros.class);
             startActivity(a);
         }

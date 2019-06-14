@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -34,12 +33,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wikimovies.Controller.DataController;
 import com.example.wikimovies.Controller.LoginController;
 import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.R;
-import com.example.wikimovies.Datos.Modelo;
-import com.example.wikimovies.Datos.Usuario;
 import com.example.wikimovies.Services.MoviesServices;
 
 import java.util.ArrayList;
@@ -96,7 +92,7 @@ public class login extends AppCompatActivity implements LoaderManager.LoaderCall
         lblGotoRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(login.this, registro.class);
+                Intent a = new Intent(login.this, registroActivity.class);
                 startActivity(a);
             }
         });
@@ -233,8 +229,6 @@ public class login extends AppCompatActivity implements LoaderManager.LoaderCall
         String password = inputPassword.getText().toString();
 
         if (LoginController.getInstance().doLogin(email, password)) {
-            DataController.getInstance().cargarUsuarios();
-            //USUARIO= ;
             existeUsuario = true;
             finish();
             Intent a = new Intent(login.this, MainActivity.class);

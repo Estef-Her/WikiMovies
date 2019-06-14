@@ -16,7 +16,6 @@ public class Usuario  implements java.io.Serializable {
      private int edad;
      private String sexo;
      private String password;
-     private String rol;
 
 
     public Usuario() {
@@ -27,14 +26,13 @@ public class Usuario  implements java.io.Serializable {
         this.email = email;
     }
 
-    public Usuario(String email, String nombre, String apellidos, int edad, String sexo, String password, String rol) {
+    public Usuario(String email, String nombre, String apellidos, int edad, String sexo, String password) {
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.edad = edad;
         this.sexo = sexo;
         this.password = password;
-        this.rol = rol;
     }
    
 
@@ -93,20 +91,6 @@ public class Usuario  implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    
-
-    public String getRol() {
-        return this.rol;
-    }
-    
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-
-
-
 
 }
 

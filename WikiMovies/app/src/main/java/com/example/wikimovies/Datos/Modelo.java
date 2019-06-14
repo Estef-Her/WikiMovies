@@ -22,13 +22,13 @@ public class Modelo {
     public void insertarDatosQuemados(){
         Usuarios=new ArrayList<>();
         logueado=new Usuario();
-        Usuario Usuario1= new Usuario("Estefany","Hernández Arce","1","dh17376334@gmail.com",21,"F","user");
+        Usuario Usuario1= new Usuario("Estefany","Hernández Arce","1","dh17376334@gmail.com",21,"F");
         Usuario1.getGenerosPelis().add(new Genero("dh17376334@gmail.com","comedia"));
         Usuario1.getGenerosPelis().add(new Genero("dh17376334@gmail.com","romance"));
         Usuario1.getGenerosPelis().add(new Genero("dh17376334@gmail.com","terror"));
         Usuario1.getGenerosPelis().add(new Genero("dh17376334@gmail.com","suspenso"));
         this.Usuarios.add(Usuario1);
-        Usuario Usuario2= new Usuario("Roger","Amador","12345678","rogeramador@gmail.com",21,"M","admin");
+        Usuario Usuario2= new Usuario("Roger","Amador","12345678","rogeramador@gmail.com",21,"M");
         Usuario2.getGenerosPelis().add(new Genero("rogeramador@gmail.com","accion"));
         Usuario2.getGenerosPelis().add(new Genero("rogeramador@gmail.com","comedia"));
         Usuario2.getGenerosPelis().add(new Genero("rogeramador@gmail.com","romance"));

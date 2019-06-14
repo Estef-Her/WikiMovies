@@ -23,90 +23,88 @@
         android:visibility="gone" />
 
 
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/login_form"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
+            <AutoCompleteTextView
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/txtPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/btnLogin"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="123dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/myblue"
-                    android:bottomRightRadius="10dp"
-                    android:bottomLeftRadius="10dp"
-                    android:gravity="center"
-                    android:text="@string/ingresar"
-                    android:textColor="#FDF5F1F1"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnRegistro"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="123dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/myorange"
-                    android:gravity="center"
-                    android:text="@string/registrarse"
-                    android:bottomRightRadius="10dp"
-                    android:bottomLeftRadius="10dp"
-                    android:textColor="#FDF5F1F1"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/login_error"
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dip"
-                android:layout_marginBottom="40dip"
-                android:gravity="center"
-                android:textColor="#AA0B10"
-                android:textSize="20dip" />
-        </LinearLayout>
+                android:hint="@string/prompt_email"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txtPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeActionId="6"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="?android:textAppearanceSmall"
+            android:layout_width="123dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@color/myblue"
+            android:bottomLeftRadius="10dp"
+            android:bottomRightRadius="10dp"
+            android:gravity="center"
+            android:text="@string/ingresar"
+            android:textColor="#FDF5F1F1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnRegistro"
+            style="?android:textAppearanceSmall"
+            android:layout_width="123dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@color/myorange"
+            android:bottomLeftRadius="10dp"
+            android:bottomRightRadius="10dp"
+            android:gravity="center"
+            android:text="@string/registrarse"
+            android:textColor="#FDF5F1F1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/login_error"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:layout_marginBottom="40dip"
+            android:gravity="center"
+            android:textColor="#AA0B10"
+            android:textSize="20dip" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

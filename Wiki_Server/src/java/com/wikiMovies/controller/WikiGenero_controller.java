@@ -138,7 +138,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     }// </editor-fold>
 
     private void doCreate(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
-        PrintWriter out = response.getWriter();
+       try{ PrintWriter out = response.getWriter();
         Gson gson = new Gson();
         String email = (String)request.getParameter("email");
         Usuario u = new Usuario();
@@ -146,7 +146,10 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         String descripcion = (String)request.getParameter("descrip");        
         ServicioWikiGeneros.instance().crearGenero(u, descripcion);
         boolean respuesta=true;
-        out.write(gson.toJson(respuesta));
+        out.write(gson.toJson(respuesta));}
+       catch(Exception e){
+            response.setStatus(400); // faild    
+        }
     }
 
     private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, NoDataException, InstantiationException, IllegalAccessException, Exception {
@@ -192,15 +195,17 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, GlobalException, NoDataException, InstantiationException, IllegalAccessException {
-        PrintWriter out = response.getWriter();
+        try{PrintWriter out = response.getWriter();
         Gson gson = new Gson();
-        String email = (String)request.getParameter("email");
-         String descripcion = (String)request.getParameter("descrip");      
+        String email = (String)request.getParameter("email");    
         Usuario aux = new Usuario();
         aux.setEmail(email);
-        ServicioWikiGeneros.instance().eliminarGenero(email,descripcion);
+        ServicioWikiGeneros.instance().eliminarGenero(email);
         boolean respuesta=true;
-        out.write(gson.toJson(respuesta));
+        out.write(gson.toJson(respuesta));}
+        catch(Exception e){
+            response.setStatus(400); // faild    
+        }
     }
 
 }

@@ -145,8 +145,7 @@ public class Usuario_controller extends HttpServlet {
         String sexo = (String)request.getParameter("sexo");
         String password = (String)request.getParameter("key");
         String email = (String)request.getParameter("email");
-        String rol = (String)request.getParameter("rol");
-        ServicioUsuario.instance().crearUsuario(nombre, apellidos, edad, sexo, password, email, rol);
+        ServicioUsuario.instance().crearUsuario(nombre, apellidos, edad, sexo, password, email);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }
@@ -160,8 +159,7 @@ public class Usuario_controller extends HttpServlet {
         String sexo = (String)request.getParameter("sexo");
         String password = (String)request.getParameter("key");
         String email = (String)request.getParameter("email");
-        String rol = (String)request.getParameter("rol");
-        ServicioUsuario.instance().modificarCurso(nombre, apellidos, edad, sexo, password, email, rol);
+        ServicioUsuario.instance().modificarCurso(nombre, apellidos, edad, sexo, password, email);
         boolean respuesta=true;
         out.write(gson.toJson(respuesta));
     }

@@ -13,8 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginController {
-    String host="10.251.32.96";
-    String puerto="8080";
+    String host="192.168.50.23";
+    String puerto="30503";
     private LoginModel model = new LoginModel();
     private static final LoginController ourInstance = new LoginController();
 
@@ -53,7 +53,7 @@ public class LoginController {
     public boolean doLogin(String user , String pass){
         boolean res= false;
         DataController.getInstance().cargarAplicacion();
-        String apiUrl = "http://"+host+":"+puerto+"/Wiki_Server/doLogin?email="+user+"&key="+pass;
+        String apiUrl = "http://"+host+":"+puerto+"/Wiki_Server/doLogin?email="+user+"&password="+pass;
 
         String current = "";
         try {
@@ -76,14 +76,15 @@ public class LoginController {
 
                 JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
                 String email= jsonObject.getString("email");
-                String clave=jsonObject.getString("key");
-                String rol=jsonObject.getString("rol");
-                Usuario usuario =  new Usuario();
-                usuario.setRol(rol);
-                usuario.setEmail(email);
-                usuario.setPassword(clave);
-                USER =usuario;
+                String nombre=jsonObject.getString("nombre");
+                String apellidos=jsonObject.getString("apellidos");
+                int edad =jsonObject.getInt("edad");
+                String sexo =jsonObject.getString("sexo");
+                String password =jsonObject.getString("password");
+                Usuario usuario =  new Usuario(nombre,apellidos,password,email,edad,sexo);
+                USER = usuario;
                 existeUsuario=true;
+                DataController.getInstance().cargarGenerosXUsuario(USER.getEmail());
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

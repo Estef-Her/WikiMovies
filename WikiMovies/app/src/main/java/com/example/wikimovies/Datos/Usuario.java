@@ -10,30 +10,27 @@ public class Usuario {
     String email;
     int edad;
     String sexo;
-    String rol;
     List<Genero> generosPelis = new ArrayList<>();
     List<Favorito> pelisFavoritas = new ArrayList<>();
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo, String rol) {
+    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.email = email;
         this.edad = edad;
         this.sexo = sexo;
-        this.rol = rol;
     }
 
-    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo, String rol, List<Genero> generosPelis, List<Favorito> pelisFavoritas) {
+    public Usuario(String nombre, String apellidos, String password, String email, int edad, String sexo, List<Genero> generosPelis, List<Favorito> pelisFavoritas) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.password = password;
         this.email = email;
         this.edad = edad;
         this.sexo = sexo;
-        this.rol = rol;
         this.generosPelis = generosPelis;
         this.pelisFavoritas = pelisFavoritas;
     }
@@ -86,13 +83,6 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
 
     public List<Genero> getGenerosPelis() {
         return generosPelis;

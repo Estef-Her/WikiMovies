@@ -48,7 +48,7 @@ public class ServicioBusquedas extends Service{
             WikiGenero w = new WikiGenero();
             aux.setEmail(rs.getString("usuario"));
             w.setUsuario(aux);
-            w.setDescripcion(rs.getString("nombre"));         
+            w.setDescripcion(rs.getString("descripcion"));         
             return w;
         }
         catch (SQLException ex) {
@@ -63,7 +63,6 @@ public class ServicioBusquedas extends Service{
             u.setEdad(rs.getInt("edad"));
             u.setSexo(rs.getString("sexo"));
             u.setPassword(rs.getString("password"));
-            u.setRol(rs.getString("rol"));
             u.setEmail(rs.getString("email"));          
             return u;
         }

@@ -1,6 +1,8 @@
 package com.example.wikimovies.Controller;
 
 
+import android.os.StrictMode;
+
 import com.example.wikimovies.Datos.Favorito;
 import com.example.wikimovies.Datos.Genero;
 import com.example.wikimovies.Datos.Usuario;
@@ -17,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import static com.example.wikimovies.Activity.login.USER;
+import static com.example.wikimovies.Activity.login.existeUsuario;
 
 public class DataController {
     private DatosModel model = new DatosModel();
@@ -65,7 +69,6 @@ public class DataController {
         u.setEmail(jsonObject.getString("email"));
         u.setPassword(jsonObject.getString("key"));
         u.setSexo(jsonObject.getString("sexo"));
-        u.setRol(jsonObject.getString("rol"));
         u.setGenerosPelis((List<Genero>) this.buscarGeneroXId(u.getEmail()));
         u.setPelisFavoritas((List<Favorito>) this.buscarFavoritosXId(u.getEmail()));
     }
@@ -88,7 +91,6 @@ public class DataController {
             u.setPassword(password);
             u.setEmail(email);
             u.setSexo(sexo);
-            u.setRol(rol);
             u.setNombre(nombre);
             u.setApellidos(apellidos);
             u.setGenerosPelis((List<Genero>) this.buscarGeneroXId(u.getEmail()));
@@ -123,40 +125,7 @@ public class DataController {
         model.setGeneros(generos);
     }
 
-    public void cargarUsuarios(){
-        String apiUrl = "http://"+ LoginController.getInstance().host+":"+ LoginController.getInstance().puerto+"/Wiki_Server/BusquedaDatos?action=usuarios";
-        String current = "";
-        try {
-            URL url;
-            HttpURLConnection urlConnection = null;
-            try {
-                url = new URL(apiUrl);
 
-                urlConnection = (HttpURLConnection) url
-                        .openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
-                StringBuilder responseStrBuilder= new StringBuilder();
-
-                String inputStr;
-                while((inputStr = streamReader.readLine())!=null){
-                    responseStrBuilder.append(inputStr);
-                }
-                JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
-                serializarUsuarios(jsonObject);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }}
     public void cargarFavoritos(){
         String apiUrl = "http://"+ LoginController.getInstance().host+":"+ LoginController.getInstance().puerto+"/Wiki_Server/BusquedaDatos?action=favoritos";
         String current = "";
@@ -231,15 +200,239 @@ public class DataController {
         if(!model.isCargado()){
             cargarFavoritos();
             cargarPeliGeneros();
-            cargarUsuarios();
         }
 
     }
 
+    public boolean addUsuario(Usuario al){
+        StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String apiUrl = "http://"+LoginController.getInstance().host+":"+LoginController.getInstance().puerto+"/Wiki_Server/createUser?nombre="+
+                al.getNombre()+"&apellidos="+
+                al.getApellidos()+"&edad="+al.getEdad()+
+                "&sexo="+al.getSexo()+
+                "&key="+al.getPassword()+
+                "&email="+al.getEmail();
+        String current = "";
+        boolean res= false;
+        try {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                url = new URL(apiUrl);
 
+                urlConnection = (HttpURLConnection) url
+                        .openConnection();
 
-    public void actualizarUsuario(String username){
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                StringBuilder responseStrBuilder= new StringBuilder();
 
+                String inputStr;
+                while((inputStr = streamReader.readLine())!=null){
+                    responseStrBuilder.append(inputStr);
+                }
+                boolean respuesta=Boolean.parseBoolean(responseStrBuilder.toString());
+                res= respuesta;
+                USER=al;
+                existeUsuario=false;
+            } catch (Exception e) {
+                e.printStackTrace();
+                res=false;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public void cargarGenerosXUsuario(String email){
+        String apiUrl = "http://"+LoginController.getInstance().host+":"+LoginController.getInstance().puerto+"/Wiki_Server/findAllWiki?email="+email;
+        String current = "";
+        try {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                url = new URL(apiUrl);
+
+                urlConnection = (HttpURLConnection) url
+                        .openConnection();
+
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                StringBuilder responseStrBuilder= new StringBuilder();
+
+                String inputStr;
+                while((inputStr = streamReader.readLine())!=null){
+                    responseStrBuilder.append(inputStr);
+                }
+                List<Genero> generos= new ArrayList<>();
+                JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
+                JSONArray jsonArray= jsonObject.getJSONArray("myArrayList");
+                for(int i=0; i< jsonArray.length();i++){
+                    JSONObject car= jsonArray.getJSONObject(i);
+                    String descripcion =car.getString("descripcion");
+                    Genero matricula= new Genero(email,descripcion);
+                    generos.add(matricula);
+                }
+                USER.setGenerosPelis(generos);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean addGeneros(List<String> generos){
+        boolean respuesta=false;
+        for(String g : generos){
+            if(!addGenero(g)){
+                respuesta=false;
+                break;
+            }else{
+                respuesta=true;
+            }
+        }
+        return respuesta;
+    }
+    public boolean addGenero(String g){
+        StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String apiUrl = "http://"+LoginController.getInstance().host+":"+LoginController.getInstance().puerto+"/Wiki_Server/createWiki?email="+
+                USER.getEmail()+"&descrip="+
+                g;
+        String current = "";
+        boolean res= false;
+        try {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                url = new URL(apiUrl);
+
+                urlConnection = (HttpURLConnection) url
+                        .openConnection();
+
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                StringBuilder responseStrBuilder= new StringBuilder();
+
+                String inputStr;
+                while((inputStr = streamReader.readLine())!=null){
+                    responseStrBuilder.append(inputStr);
+                }
+                boolean respuesta=Boolean.parseBoolean(responseStrBuilder.toString());
+                res= respuesta;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                res=false;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public boolean deleteGeneros(){
+        StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String apiUrl = "http://"+LoginController.getInstance().host+":"+LoginController.getInstance().puerto+"/Wiki_Server/deleteGenr?email="+
+                USER.getEmail();
+        String current = "";
+        boolean res= false;
+        try {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                url = new URL(apiUrl);
+
+                urlConnection = (HttpURLConnection) url
+                        .openConnection();
+
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                StringBuilder responseStrBuilder= new StringBuilder();
+
+                String inputStr;
+                while((inputStr = streamReader.readLine())!=null){
+                    responseStrBuilder.append(inputStr);
+                }
+                boolean respuesta=Boolean.parseBoolean(responseStrBuilder.toString());
+                res= respuesta;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                res=false;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    public boolean actualizarUsuario(Usuario al){
+        StrictMode.ThreadPolicy policy= new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String apiUrl = "http://"+LoginController.getInstance().host+":"+LoginController.getInstance().puerto+"/Wiki_Server/updateUser?nombre="+
+                al.getNombre()+"&apellidos="+
+                al.getApellidos()+"&edad="+al.getEdad()+
+                "&sexo="+al.getSexo()+
+                "&key="+al.getPassword()+
+                "&email="+al.getEmail();
+        String current = "";
+        boolean res= false;
+        try {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                url = new URL(apiUrl);
+
+                urlConnection = (HttpURLConnection) url
+                        .openConnection();
+
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader streamReader= new BufferedReader(new InputStreamReader(in,"UTF-8"));
+                StringBuilder responseStrBuilder= new StringBuilder();
+
+                String inputStr;
+                while((inputStr = streamReader.readLine())!=null){
+                    responseStrBuilder.append(inputStr);
+                }
+                boolean respuesta=Boolean.parseBoolean(responseStrBuilder.toString());
+                res= respuesta;
+                USER=al;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                res=false;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     public void actualizarFavorito(String username){
 

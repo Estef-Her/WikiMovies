@@ -22,21 +22,11 @@
             android:gravity="center_vertical|center_horizontal"
             app:titleMarginStart="150dp" />
 
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/carouselView"
+
+        <FrameLayout
+            android:id="@+id/fragment_container_principal"
             android:layout_width="match_parent"
-            android:layout_height="243dp"
-            app:fillColor="#E03B31"
-            app:pageColor="#00000000"
-            app:radius="6dp"
-            app:slideInterval="3000"
-            app:strokeColor="#FF777777"
-            app:strokeWidth="1dp" />
-
-
-
-            <include layout="@layout/content_main" />
-
+            android:layout_height="696dp"></FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 

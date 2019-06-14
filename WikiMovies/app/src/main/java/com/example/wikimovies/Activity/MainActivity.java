@@ -2,6 +2,8 @@ package com.example.wikimovies.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +18,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Intent;
+
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Movie;
 import com.example.wikimovies.Datos.Result;
@@ -63,30 +66,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<Movie> warMovies;
     private List<Movie> westernMovies;
     String api_key = "bc742fda54c5bce645dcb30e8c22f91f";
-    CarouselView carouselView;
 
-    int[] sampleImages = {R.drawable.poster1, R.drawable.poster2, R.drawable.poster3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
-
-        carouselView.setImageListener(new ImageListener() {
-
-            @Override
-            public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(sampleImages[position]);
-            }
-        });
-        carouselView.setImageClickListener(new ImageClickListener() {
-            @Override
-            public void onClick(int position) {
-
-            }
-        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -98,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        setFragment(1);
         getLatestMovies();
         getPopularMovies();
         getBestMovies();
@@ -129,15 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
 
-        if(existeUsuario){
-            menu.findItem(R.id.nav_cuenta).setVisible(true);
-            menu.findItem(R.id.nav_logout).setVisible(true);
-            menu.findItem(R.id.nav_login).setVisible(false);
-        }else{
-            menu.findItem(R.id.nav_cuenta).setVisible(false);
-            menu.findItem(R.id.nav_logout).setVisible(false);
-            menu.findItem(R.id.nav_login).setVisible(true);
-        }
+            if(existeUsuario){
+                menu.findItem(R.id.nav_cuenta).setVisible(true);
+                menu.findItem(R.id.nav_logout).setVisible(true);
+                menu.findItem(R.id.nav_login).setVisible(false);
+            }else{
+                menu.findItem(R.id.nav_cuenta).setVisible(false);
+                menu.findItem(R.id.nav_logout).setVisible(false);
+                menu.findItem(R.id.nav_login).setVisible(true);
+            }
 
 
         return super.onPrepareOptionsMenu(menu);
@@ -173,25 +158,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
+    public void setFragment(int position){
+        switch(position){
+            case 1:
+                FragmentManager fm3;
+                FragmentTransaction ft3;
+                fm3= getSupportFragmentManager();
+                ft3=fm3.beginTransaction();
+                ft3.replace(R.id.fragment_container_principal, new principal_Fragment());
+                ft3.addToBackStack(null).commit();
+                break;
+            case 2:
+                FragmentManager fm4;
+                FragmentTransaction ft4;
+                fm4= getSupportFragmentManager();
+                ft4=fm4.beginTransaction();
+                ft4.replace(R.id.fragment_container_principal, new cuenta_fragment());
+                ft4.addToBackStack(null).commit();
+                break;
+            case 3:
+                FragmentManager fm1;
+                FragmentTransaction ft1;
+                fm1= getSupportFragmentManager();
+                ft1=fm1.beginTransaction();
+                ft1.replace(R.id.fragment_container_principal, new infoPeli_fragment());
+                ft1.addToBackStack(null).commit();
+                break;
 
+        }
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_login) {
-            Toast.makeText(getApplicationContext(), "Iniciar Sesión", Toast.LENGTH_SHORT).show();
+        if(id==R.id.nav_Home){
+            setFragment(1);
+        }
+        else if (id == R.id.nav_login) {
+            Toast.makeText(getApplicationContext(), "Bienvenid@ a WikiMovies", Toast.LENGTH_SHORT).show();
             login();
         } else if (id == R.id.nav_cuenta) {
             Toast.makeText(getApplicationContext(), "Ver Cuenta", Toast.LENGTH_SHORT).show();
             verCuenta();
 
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(getApplicationContext(), "Cerrar Sesion", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion Finalizada", Toast.LENGTH_SHORT).show();
             logout();
         } else if (id == R.id.nav_acercaDe) {
-            Toast.makeText(getApplicationContext(), "Aacerca De", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Desarrollada por Estefany y Roger", Toast.LENGTH_SHORT).show();
             acercaDe();
         } else if (id == R.id.nav_ayuda) {
             Toast.makeText(getApplicationContext(), "Ayuda", Toast.LENGTH_SHORT).show();
@@ -749,7 +764,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<Movie> searchMovies() {
         String text = "Avengers";
         MoviesServices services = RetrofitInstance.getService();
-        Call<Result> call = services.searchMovie(api_key,text);
+        Call<Result> call = services.searchMovie(api_key,"Avengers");
         call.enqueue(new Callback<Result>(){
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -771,26 +786,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     void login(){
         Intent a = new Intent(this, login.class);
         startActivity(a);
-
     }
     void personalizar(){
         // Intent a = new Intent(this, Personalizar.class);
         // startActivity(a);
     }
     void verCuenta(){
-        Intent a = new Intent(this, cuenta.class);
-        startActivity(a);
+        setFragment(2);
     }
     void logout(){
-        finish();
-        Intent a = new Intent(this,MainActivity.class);
-        USER=new Usuario();
-        existeUsuario=false;
-        startActivity(a);
+          finish();
+          Intent a = new Intent(this,MainActivity.class);
+          USER=new Usuario();
+          existeUsuario=false;
+          startActivity(a);
     }
     void ayuda(){
         // Intent a = new Intent(this, Ayuda.class);

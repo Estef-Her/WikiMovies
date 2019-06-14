@@ -10,28 +10,27 @@ Create table Usuario (
     sexo varchar(5),
     password varchar(10),
     email varchar(100) not null,
-    rol varchar(40),
-    constraint pkUsuario primary key(email)
+    constraint pk1Usuario primary key(email)
 );
 
 Create table Wiki_Genero(   
     usuario varchar(100) not null,
     descripcion varchar(100) not null,
-    constraint pkGenero primary key(usuario,descripcion),
-    constraint fkGenero foreign key (usuario) references Usuario(email)
+    constraint pk1Genero primary key(usuario,descripcion),
+    constraint fk1Genero foreign key (usuario) references Usuario(email)
 );
 
 Create table Favorito(
     usuario varchar(50) not null,
     pelicula varchar(80) not null,
     puntuacion number,
-    constraint pkFavorito primary key(usuario,pelicula),
-	constraint fkFavorito foreign key (usuario) references Usuario(email)
+    constraint pk1Favorito primary key(usuario,pelicula),
+	constraint fk1Favorito foreign key (usuario) references Usuario(email)
 );
 
 
-INSERT INTO Usuario VALUES ('Roger','Amador',23,'M','admin','addielo.oamvi@gmail.com','admin');
-INSERT INTO Usuario VALUES ('Estefany','Hernandez',22,'F','admin','dh17376334@gmail.com','admin');
+INSERT INTO Usuario VALUES ('Roger','Amador',23,'M','admin','addielo.oamvi@gmail.com');
+INSERT INTO Usuario VALUES ('Estefany','Hernandez',22,'F','admin','dh17376334@gmail.com');
 commit;
 
 --CREATE SEQUENCE NUMERO_SEQ START WITH 1 INCREMENT BY 1 CACHE 20;
@@ -147,6 +146,16 @@ CREATE OR REPLACE FUNCTION login(xemail IN Usuario.email%TYPE, xpassword IN Usua
     OPEN c FOR 
         SELECT COUNT(email) AS exist FROM Usuario WHERE email = xemail AND password = xpassword;
         RETURN c; 
+    END;
+    /
+	
+	CREATE OR REPLACE FUNCTION buscar_usuario_email (xemail in Usuario.email%TYPE) RETURN SYS_REFCURSOR
+    IS 
+    c SYS_REFCURSOR;
+    BEGIN
+        OPEN c FOR SELECT *FROM Usuario WHERE email = xemail;
+         RETURN c; 
+         CLOSE c;  
     END;
     /
 commit;

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class ServicioWikiGeneros extends Service{
     private static final String CREARGENERO= "{call crearGenero(?,?}";
     private static final String MODIFICARGENERO= "{call modificarGenero(?,?)}";
-    private static final String ELIMINARGENERO= "{call eliminarGenero(?,?)}";
+    private static final String ELIMINARGENERO= "{call eliminarGenero(?)}";
     private static ServicioWikiGeneros uniqueInstance;
     public static ServicioWikiGeneros instance(){
         if (uniqueInstance == null){
@@ -92,7 +92,7 @@ public class ServicioWikiGeneros extends Service{
            }
        }
    }      
-    public void eliminarGenero(String email, String descripcion) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
+    public void eliminarGenero(String email) throws AccesoADatos.GlobalException, AccesoADatos.NoDataException, InstantiationException, IllegalAccessException  	{
        try {
            conectar();
        } catch (ClassNotFoundException e) {
@@ -104,8 +104,7 @@ public class ServicioWikiGeneros extends Service{
 
        try {
            pstmt = conexion.prepareCall(ELIMINARGENERO);
-           pstmt.setString(1,email);
-           pstmt.setString(2,descripcion);       
+           pstmt.setString(1,email);      
            boolean resultado = pstmt.execute();
            if (resultado == true) {
                throw new AccesoADatos.NoDataException("No se realizo la inserci�n");
