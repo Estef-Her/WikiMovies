@@ -16,8 +16,6 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Intent;
-
-import com.example.wikimovies.Datos.Info;
 import com.example.wikimovies.Datos.Modelo;
 import com.example.wikimovies.Datos.Movie;
 import com.example.wikimovies.Datos.Result;
